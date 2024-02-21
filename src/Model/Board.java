@@ -135,22 +135,6 @@ public class Board {
         initializeBoard();
     }
     
-    public Player getPlr1() {
-        return plr1;
-    }
-
-    public void setPlr1(Player plr1) {
-        this.plr1 = plr1;
-    }
-
-    public Player getPlr2() {
-        return plr2;
-    }
-
-    public void setPlr2(Player plr2) {
-        this.plr2 = plr2;
-    }
-
     public boolean getGameState(){
         return this.gameHasFinished;
     }
