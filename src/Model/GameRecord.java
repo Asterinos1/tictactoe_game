@@ -8,17 +8,24 @@ public class GameRecord {
     private int scr1, scr2;
     private LocalDateTime currentTime;
 
-    public GameRecord(Player plr1, Player plr2, int scr1, int scr2, String outcome){
-        this.plr1 = plr1;
-        this.plr2 = plr2;
-        this.scr1 = scr1;
-        this.scr2 = scr2;
-        this.outcome = outcome;
+    public GameRecord(int outcome){
         this.currentTime = LocalDateTime.now();
+        setGameOutcome(outcome);
     }
 
-    
+    public void setGameOutcome(int outcome) {
+        if(outcome == 1){
+            this.outcome ="X victory";
+        }else if(outcome == 2){
+            this.outcome = "O victory";
+        }else if(outcome == 0){
+            this.outcome = "tie";
+        }
+    }
 
+    public String getGameInfo(){
+        return "Game played at: "+currentTime+" "+outcome;
+    }
     public Player getPlr1() {
         return plr1;
     }

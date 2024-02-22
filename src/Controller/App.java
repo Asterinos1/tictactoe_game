@@ -1,22 +1,32 @@
 package Controller;
-import Model.Board;
-import Model.GameRecord;
-import Model.Player;
+import View.MainWindow;
 
 public class App {
     public static void main(String[] args) {
-        Board brd = new Board();
         
+        //main logic almost complete.
+        /*
+        Board brd = new Board();
+        brd.printBoard();  
+                while(!brd.gameHasFinished() && brd.getMoves()>0) {
+                    brd.makeMove();
+                    brd.printBoard();
+                }
+                System.out.println("Game has concluded.");
 
-        brd.printBoard();
+                if(brd.getWinner()==1){
+                    GameRecord gmrcd = new GameRecord(1);
+                    System.out.println(gmrcd.getGameInfo());
+                }else if(brd.getWinner()==2){
+                    GameRecord gmrcd = new GameRecord(2);
+                    System.out.println(gmrcd.getGameInfo());
+                }else if(brd.getWinner()==0){
+                    GameRecord gmrcd = new GameRecord(0);
+                    System.out.println(gmrcd.getGameInfo());
+                }
+         */
        
-        while(!brd.getGameState()) {
-            brd.makeMove();
-            brd.printBoard();
-        }
-
-       
-
-
+        new MainWindow();
+        
     }
 }
