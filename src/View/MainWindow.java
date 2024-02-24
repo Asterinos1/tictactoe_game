@@ -17,7 +17,6 @@ public class MainWindow extends JFrame {
         this.add(new PlayerPanel("Left"));
         this.add(new PlayerPanel("Right"));
         this.setVisible(true);
-        
 
         //setting a image on the top left of the frame.
         ImageIcon image = new ImageIcon("ttt.png");
