@@ -1,5 +1,5 @@
 package View;
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,6 +16,7 @@ public class MainWindow extends JFrame {
         this.add(new BannerPanel());
         this.add(new PlayerPanel("Left"));
         this.add(new PlayerPanel("Right"));
+        this.add(new GameBoard());
         this.setVisible(true);
 
         //setting a image on the top left of the frame.
