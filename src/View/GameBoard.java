@@ -33,12 +33,14 @@ public class GameBoard extends JPanel implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==this.buttons) {
-
+        for (JButton button : buttons) {
+            if (e.getSource() == button) {
+                // The specific button is pressed
+                // Perform the desired action for this button
+                // For example, you can print the button's text
+                System.out.println("Button pressed: " + button.getText());
+                button.setEnabled(false);
+            }
         }
-    }
-
-    public void modifyButtons(JButton button){
-        button.setEnabled(false);
     }
 }
