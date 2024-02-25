@@ -6,13 +6,11 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import Model.Player;
 import Model.PlayerRoster;
 
@@ -26,6 +24,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
     PlayerRoster playerList = new PlayerRoster();
 
     public PlayerPanel(String position){
+        this.setName(position);
         this.setBackground(Color.green);
         setBoundsOfPanel(position);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 110));
@@ -59,7 +58,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
         putPlayersInsideComboBox(availablePlayers, playerList.getPlayers());
 
-        playerRoaster.setTitle("Select player.");
+        playerRoaster.setTitle("Select "+ this.getName() + " player.");
         playerRoaster.setResizable(false);
         playerRoaster.setSize(300, 120);
         playerRoaster.setLayout(new FlowLayout());
@@ -72,7 +71,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void putPlayersInsideComboBox(JComboBox box, ArrayList<Player> players){
         for(int i=0; i<players.size(); i++){
             box.addItem(players.get(i).getName());
