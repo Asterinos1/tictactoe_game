@@ -5,18 +5,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class MainWindow extends JFrame {
-    
-    public MainWindow(){
+    HallOfFame hof = new HallOfFame();
+    PlayerPanel lpp = new PlayerPanel("Left");
+    PlayerPanel rpp = new PlayerPanel("Right");
+    BannerPanel bp = new BannerPanel();
+    GameBoard gb = new GameBoard();
 
+
+    public MainWindow(){
         this.setTitle("Tic-Tac-Toe");
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.setLayout(null);
-        this.add(new BannerPanel());
-        this.add(new PlayerPanel("Left"));
-        this.add(new PlayerPanel("Right"));
-        this.add(new GameBoard());
+        this.add(bp);
+        this.add(lpp);
+        this.add(rpp);
+        this.hof.setVisible(false);
+        this.add(hof);
+        this.add(gb);
         this.setVisible(true);
 
         //setting a image on the top left of the frame.
