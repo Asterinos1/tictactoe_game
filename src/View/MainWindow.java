@@ -1,6 +1,9 @@
 package View;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -32,5 +35,14 @@ public class MainWindow extends JFrame {
         //set frame background colour.
         this.getContentPane().setBackground(new Color(255,251,182));
 
+        // Add action listener to the "Hall of Fame" button in BannerPanel
+        bp.HOFButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Toggle visibility of HallOfFame and GameBoard panels
+                hof.setVisible(!hof.isVisible());
+                gb.setVisible(!hof.isVisible());
+            }
+        });
     }
 }

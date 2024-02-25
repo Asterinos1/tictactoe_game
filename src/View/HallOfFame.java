@@ -9,7 +9,7 @@ public class HallOfFame extends JPanel {
     JLabel ScreenTitle = new JLabel("Hall of fame");
     
     public HallOfFame(){
-        this.setBackground(Color.BLUE);
+        this.setBackground(Color.white);
         this.setBounds(300, 100, 600, 700);
         this.add(ScreenTitle);
     }

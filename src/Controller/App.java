@@ -1,9 +1,9 @@
 package Controller;
-import View.MainWindow;
+import Model.PlayerRoster;
+import View.*;
 
 public class App {
     public static void main(String[] args) {
-        
         //main logic almost complete.
         /*
         Board brd = new Board();
@@ -25,8 +25,8 @@ public class App {
                     System.out.println(gmrcd.getGameInfo());
                 }
          */
-       
         new MainWindow();
-        
+        PlayerRoster pr = new PlayerRoster();
+        pr.loadPlayers();
     }
 }
