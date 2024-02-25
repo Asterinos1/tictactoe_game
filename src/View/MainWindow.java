@@ -3,17 +3,15 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class MainWindow extends JFrame {
+    
     HallOfFame hof = new HallOfFame();
     PlayerPanel lpp = new PlayerPanel("Left");
     PlayerPanel rpp = new PlayerPanel("Right");
     BannerPanel bp = new BannerPanel();
     GameBoard gb = new GameBoard();
-
 
     public MainWindow(){
         this.setTitle("Tic-Tac-Toe");
@@ -29,9 +27,6 @@ public class MainWindow extends JFrame {
         this.add(gb);
         this.setVisible(true);
 
-        //setting a image on the top left of the frame.
-        ImageIcon image = new ImageIcon("ttt.png");
-        this.setIconImage(image.getImage());
         //set frame background colour.
         this.getContentPane().setBackground(new Color(255,251,182));
 

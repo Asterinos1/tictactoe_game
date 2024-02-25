@@ -52,7 +52,6 @@ public class BannerPanel extends JPanel implements ActionListener{
         button.addActionListener(null);
 
         apframe.setResizable(false);
-        apframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         apframe.setSize(300, 120);
         apframe.setLayout(new FlowLayout());
         
