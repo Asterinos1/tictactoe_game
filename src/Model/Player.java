@@ -15,14 +15,6 @@ public class Player {
         this.numOfVictories=0;
         this.numOfDraws=0;
     }
-    
-    public Player(String name, int a, int b, int c, int d){
-        this.name = name;
-        this.totalGamesPlayed=a;
-        this.numOfVictories=b;
-        this.numOfDefeats=c;
-        this.numOfDraws=d;
-    }
 
     public String getName() {
         return name;

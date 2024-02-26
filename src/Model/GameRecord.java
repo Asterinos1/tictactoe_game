@@ -1,44 +1,68 @@
 package Model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class GameRecord {
-    String fileName = "gamerecird.txt";
-
-    public GameRecord(){
-        
+    private String player1, player2;
+    private int outcome;
+    private float scr1, scr2;
+    private LocalDateTime date;
+    
+    public GameRecord(String player1, String player2, int oucome, float scr1, float scr2, LocalDateTime date){
+        this.player1 = player1;
+        this.player2 = player2;
+        this.outcome = oucome;
+        this.scr1=scr1;
+        this.scr2=scr2;
+        this.date = date;
     }
 
-    public void lodDataFromFile(){
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Split the line into parts
-                String[] parts = line.split(":");
-
-                // Parse the parts into variables
-                String name1 = parts[0];
-                String name2 = parts[1];
-                int outcome = Integer.parseInt(parts[2]);
-                float playerScore1 = Float.parseFloat(parts[3]);
-                float playerScore2 = Float.parseFloat(parts[4]);
-                Date date = new Date(parts[5]); // Assuming the date is in a format that can be parsed by Date
-
-                // Process or store the data as needed
-                System.out.println("Name1: " + name1);
-                System.out.println("Name2: " + name2);
-                System.out.println("Outcome: " + outcome);
-                System.out.println("Player Score1: " + playerScore1);
-                System.out.println("Player Score2: " + playerScore2);
-                System.out.println("Date: " + date);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public String getPlayer1() {
+        return player1;
     }
+
+    public void setPlayer1(String player1) {
+        this.player1 = player1;
+    }
+
+    public String getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(String player2) {
+        this.player2 = player2;
+    }
+
+    public int getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(int outcome) {
+        this.outcome = outcome;
+    }
+
+    public float getScr1() {
+        return scr1;
+    }
+
+    public void setScr1(float scr1) {
+        this.scr1 = scr1;
+    }
+
+    public float getScr2() {
+        return scr2;
+    }
+
+    public void setScr2(float scr2) {
+        this.scr2 = scr2;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
 }
