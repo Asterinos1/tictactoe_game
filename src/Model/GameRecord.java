@@ -41,19 +41,19 @@ public class GameRecord {
         this.outcome = outcome;
     }
 
-    public float getScr1() {
+    public float getScore1() {
         return scr1;
     }
 
-    public void setScr1(float scr1) {
+    public void setScore1(float scr1) {
         this.scr1 = scr1;
     }
 
-    public float getScr2() {
+    public float getScore2() {
         return scr2;
     }
 
-    public void setScr2(float scr2) {
+    public void setScore2(float scr2) {
         this.scr2 = scr2;
     }
 

@@ -8,15 +8,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PlayerRoster{
     private static final String GAMERECORDFILE = "gamerecord.txt";
     //Here we store a list of all the games ever played.
     private List<GameRecord> gameRecords;
+    // Map to store players by their name
+    private Map<String, Player> players; 
 
     public PlayerRoster(){
         gameRecords = new ArrayList<>();
+        players = new HashMap<>();
     }
 
     public void lodDataFromFile(){
@@ -24,7 +29,6 @@ public class PlayerRoster{
 
             String line;
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
 
             while ((line = br.readLine()) != null) {
                 // Split the line into parts
@@ -65,7 +69,69 @@ public class PlayerRoster{
         }
 
         //sorting the records.
-        sortGameRecordsByDate();
+        //sortGameRecordsByDate();
+
+        // Iterate through each game record
+        for (GameRecord gameRecord : gameRecords) {
+            // Extract player names from the game record
+            String playerName1 = gameRecord.getPlayer1();
+            String playerName2 = gameRecord.getPlayer2();
+            int outcome = gameRecord.getOutcome();
+            float score1 = gameRecord.getScore1();
+            float score2 = gameRecord.getScore2();
+
+
+            // Check if player objects already exist for the player names
+            if (!players.containsKey(playerName1)) {
+                // If player object doesn't exist, create a new player object and add it to the players map
+                Player player1 = new Player(playerName1);
+                player1.setScore(score1);
+                players.put(playerName1, player1);
+            }
+
+            if (!players.containsKey(playerName2)) {
+                // If player object doesn't exist, create a new player object and add it to the players map
+                Player player2 = new Player(playerName2);
+                player2.setScore(score2);
+                players.put(playerName2, player2);
+            }
+
+            //Adjust players stats here.
+            Player player1 = players.get(playerName1);
+            Player player2 = players.get(playerName2);
+
+            if (outcome == 0) {
+                // Tie
+                player1.incrementDraws();
+                player2.incrementDraws();
+
+                player1.incrementTotalGamesPlayed();
+                player2.incrementTotalGamesPlayed();
+
+                player1.updateScore();
+                player2.updateScore();
+            } else if (outcome == 1) {
+                // Player 1 victory
+                player1.incrementVictories();
+                player2.incrementDefeats();
+
+                player1.incrementTotalGamesPlayed();
+                player2.incrementTotalGamesPlayed();
+
+                player1.updateScore();
+                player2.updateScore();
+            } else if (outcome == 2) {
+                // Player 2 victory
+                player1.incrementDefeats();
+                player2.incrementVictories();
+
+                player1.incrementTotalGamesPlayed();
+                player2.incrementTotalGamesPlayed();
+                
+                player1.updateScore();
+                player2.updateScore();
+            }
+        }
     }
 
     //For sorting our games by date.
@@ -85,6 +151,22 @@ public class PlayerRoster{
     public void printAllGames(){
         for(int i=0; i<gameRecords.size(); i++){
             System.out.println(gameRecords.get(i).getPlayer1()+" vs " +gameRecords.get(i).getPlayer2()+" at " +gameRecords.get(i).getDate());
+        }
+        System.out.println("\n");
+    }
+
+    public void printAllPlayersStats() {
+        for (Map.Entry<String, Player> entry : this.players.entrySet()) {
+            String playerName = entry.getKey();
+            Player player = entry.getValue();
+            
+            System.out.println("Player Name: " + playerName);
+            System.out.println("Total Games Played: " + player.getTotalGamesPlayed());
+            System.out.println("Number of Victories: " + player.getNumOfVictories());
+            System.out.println("Number of Defeats: " + player.getNumOfDefeats());
+            System.out.println("Number of Draws: " + player.getNumOfDraws());
+            System.out.println("Total player score: " + player.getScore());
+            System.out.println("------------------------------------------");
         }
     }
 }

@@ -7,6 +7,7 @@ public class App {
         pr.lodDataFromFile();
 
         pr.printAllGames();
+        pr.printAllPlayersStats();
         //main logic almost complete.
         /*
         Board brd = new Board();

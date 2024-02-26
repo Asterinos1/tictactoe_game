@@ -7,6 +7,7 @@ public class Player {
     private int numOfVictories;
     private int numOfDefeats;
     private int numOfDraws;
+    private float score;
 
     public Player(String name){
         this.name = name;
@@ -14,6 +15,36 @@ public class Player {
         this.numOfDefeats=0;
         this.numOfVictories=0;
         this.numOfDraws=0;
+        this.score=0;
+    }
+    
+    public void updateScore(){
+        this.score += 50*((2*(float)numOfVictories)+(float) numOfDraws)/((float) totalGamesPlayed);
+    }
+
+    public void incrementTotalGamesPlayed(){
+        this.totalGamesPlayed++;
+    }
+
+    public void incrementDefeats(){
+        this.numOfDefeats++;
+    }
+
+    public void incrementVictories(){
+        this.numOfVictories++;
+    }
+
+    public void incrementDraws(){
+        this.numOfDraws++;
+    }
+
+    //setters, getters
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
     }
 
     public String getName() {
