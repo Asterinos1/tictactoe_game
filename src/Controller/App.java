@@ -9,6 +9,12 @@ public class App {
 
         pr.addNewPlayer("Asterinos");
         pr.addNewPlayer("Giolddaskjhdkashdkjahdkjahkjsdhakjhasis");
+        pr.createNewGamerecord("Asterinos", "john", 1);
+        pr.createNewGamerecord("Asterinos", "john", 1);
+        pr.createNewGamerecord("Asterinos", "john", 1);
+        pr.createNewGamerecord("Asterinos", "john", 1);
+        pr.createNewGamerecord("Asterinos", "john", 1);
+        pr.createNewGamerecord("Asterinos", "john", 1);
         pr.printAllGames();
         pr.printAllPlayersStats();
         pr.getTop5RecentGamesForPlayer("john");
@@ -34,7 +40,7 @@ public class App {
                     System.out.println(gmrcd.getGameInfo());
                 }
          */
-        //MainWindow mw = new MainWindow(pr.getPlayersMap());
+        MainWindow mw = new MainWindow(pr.getPlayersMap());
         //PlayerRoster pr = new PlayerRoster();
         //pr.loadPlayers()
 

@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 //This class represents the board's logic.
 public class Board {
+    private static final int MTRX_DMNSN = 3;
+    private static final int MAXIMUM_MOVES= 9;
+
     //Flag is used to alternate between player turns.
     private Boolean flag = true;
     //gameHasFinished checks whether the game is finished.
@@ -17,9 +20,15 @@ public class Board {
     private int moves;
 
     //Creating board.
-    private static final int MTRX_DMNSN = 3;
     private char board[][] = new char[MTRX_DMNSN][MTRX_DMNSN];
     
+       //Contructor.
+    public Board(){
+        initializeBoard();
+        this.moves=MAXIMUM_MOVES;
+    }
+    
+
     //Temporary scanner.
     Scanner scanner = new Scanner(System.in);
 
@@ -143,12 +152,6 @@ public class Board {
         return false;
     }
 
-    //Contructor.
-    public Board(){
-        initializeBoard();
-        this.moves=9;
-    }
-    
     //Returns true if the game has finished.
     //Returns false on the opposite.
     public boolean gameHasFinished(){

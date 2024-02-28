@@ -19,7 +19,7 @@ public class Player {
     }
     
     public void updateScore(){
-        this.score += 50*((2*(float)numOfVictories)+(float) numOfDraws)/((float) totalGamesPlayed);
+        this.score = 50*((2*(float)numOfVictories)+(float) numOfDraws)/((float) totalGamesPlayed);
     }
 
     public void incrementTotalGamesPlayed(){

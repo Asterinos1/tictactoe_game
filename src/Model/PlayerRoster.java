@@ -68,32 +68,34 @@ public class PlayerRoster{
             e.printStackTrace();
         }
 
-        //sorting the records.
-        //sortGameRecordsByDate();
+        updatePlayerStats();
+    }
 
+    public void updatePlayerStats(){
+        this.players.clear();
         // Iterate through each game record
-        for (GameRecord gameRecord : gameRecords) {
+        for (GameRecord gameRecord : this.gameRecords) {
             // Extract player names from the game record
             String playerName1 = gameRecord.getPlayer1();
             String playerName2 = gameRecord.getPlayer2();
             int outcome = gameRecord.getOutcome();
 
             // Check if player objects already exist for the player names
-            if (!players.containsKey(playerName1)) {
+            if (!this.players.containsKey(playerName1)) {
                 // If player object doesn't exist, create a new player object and add it to the players map
                 Player player1 = new Player(playerName1);     
-                players.put(playerName1, player1);
+                this.players.put(playerName1, player1);
             }
 
-            if (!players.containsKey(playerName2)) {
+            if (!this.players.containsKey(playerName2)) {
                 // If player object doesn't exist, create a new player object and add it to the players map
                 Player player2 = new Player(playerName2);
-                players.put(playerName2, player2);
+                this.players.put(playerName2, player2);
             }
 
             //Adjust players stats here.
-            Player player1 = players.get(playerName1);
-            Player player2 = players.get(playerName2);
+            Player player1 = this.players.get(playerName1);
+            Player player2 = this.players.get(playerName2);
 
             if (outcome == 0) {
                 // Tie
@@ -190,6 +192,7 @@ public class PlayerRoster{
             LocalDateTime currentDateTime = LocalDateTime.now();
             
             gameRecords.add(new GameRecord(playerName1, playerName2, outcome, player1Score, player2Score, currentDateTime));
+            updatePlayerStats();
         } else {
             // Player not found in the roster
             // or any other appropriate value or handle the case as needed
@@ -301,6 +304,20 @@ public class PlayerRoster{
         } else {
             System.out.println("Player not found in the roster.");
         }
+    }
+
+    public List<Player> findHallOfFame() {
+        // Get the players map
+        Map<String, Player> playersMap = getPlayersMap();
+        
+        // Create a list to store players
+        List<Player> playersList = new ArrayList<>(playersMap.values());
+        
+        // Sort the players list based on score in descending order
+        Collections.sort(playersList, (p1, p2) -> Float.compare(p2.getScore(), p1.getScore()));
+
+        // Return the top 10 players
+        return playersList.subList(0, Math.min(playersList.size(), 10));
     }
 
     public Map<String, Player> getPlayersMap() {
