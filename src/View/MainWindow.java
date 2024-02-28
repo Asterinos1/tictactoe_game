@@ -22,8 +22,8 @@ public class MainWindow extends JFrame {
         this.setSize(1200, 800);
         this.setLayout(null);
         this.add(bp);
-        this.add(new PlayerPanel("Left", players));
-        this.add(new PlayerPanel("Right", players));
+        this.add(new PlayerPanel("Left"));
+        this.add(new PlayerPanel("Right"));
         this.hof.setVisible(false);
         this.add(hof);
         this.add(gb);
