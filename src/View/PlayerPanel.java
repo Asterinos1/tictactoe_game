@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,9 +23,9 @@ public class PlayerPanel extends JPanel implements ActionListener {
     JLabel playerX = new JLabel("X");
     JLabel palyer0 = new JLabel("O");
 
-    PlayerRoster playerList = new PlayerRoster();
+    Map<String, Player> players;
 
-    public PlayerPanel(String position){
+    public PlayerPanel(String position,  Map<String, Player> players){
         this.setName(position);
         this.setBackground(Color.green);
         setBoundsOfPanel(position);
@@ -56,7 +58,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
         availablePlayers.setSize(new Dimension(100, 100));
 
-        putPlayersInsideComboBox(availablePlayers, playerList.getPlayers());
+        //putPlayersInsideComboBox(availablePlayers, playerList.getPlayers());
 
         playerRoaster.setTitle("Select "+ this.getName() + " player.");
         playerRoaster.setResizable(false);
@@ -68,7 +70,6 @@ public class PlayerPanel extends JPanel implements ActionListener {
         playerRoaster.add(button);
 
         playerRoaster.setVisible(true);
-
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -81,7 +82,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.SelectPlayerButton){
-            selectPlayerFromRoaster();
+            //selectPlayerFromRoaster();
         }
     }
 }

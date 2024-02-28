@@ -1,13 +1,18 @@
 package Controller;
 import Model.PlayerRoster;
+import View.MainWindow;
 
 public class App {
     public static void main(String[] args) {
         PlayerRoster pr = new PlayerRoster();
         pr.lodDataFromFile();
 
+        pr.addNewPlayer("Asterinos");
+        pr.addNewPlayer("Giolddaskjhdkashdkjahdkjahkjsdhakjhasis");
         pr.printAllGames();
         pr.printAllPlayersStats();
+        pr.getTop5RecentGamesForPlayer("john");
+        pr.getTop5GamesForPlayer("john");
         //main logic almost complete.
         /*
         Board brd = new Board();
@@ -29,8 +34,9 @@ public class App {
                     System.out.println(gmrcd.getGameInfo());
                 }
          */
-        //new MainWindow();
+        //MainWindow mw = new MainWindow(pr.getPlayersMap());
         //PlayerRoster pr = new PlayerRoster();
-        //pr.loadPlayers();
+        //pr.loadPlayers()
+
     }
 }

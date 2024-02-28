@@ -3,25 +3,27 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
+
 import javax.swing.JFrame;
+
+import Model.Player;
 
 public class MainWindow extends JFrame {
     
     HallOfFame hof = new HallOfFame();
-    PlayerPanel lpp = new PlayerPanel("Left");
-    PlayerPanel rpp = new PlayerPanel("Right");
     BannerPanel bp = new BannerPanel();
     GameBoard gb = new GameBoard();
 
-    public MainWindow(){
+    public MainWindow(Map<String, Player> players){
         this.setTitle("Tic-Tac-Toe");
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.setLayout(null);
         this.add(bp);
-        this.add(lpp);
-        this.add(rpp);
+        this.add(new PlayerPanel("Left", players));
+        this.add(new PlayerPanel("Right", players));
         this.hof.setVisible(false);
         this.add(hof);
         this.add(gb);
