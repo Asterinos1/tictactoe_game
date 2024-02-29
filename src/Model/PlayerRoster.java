@@ -1,7 +1,9 @@
 package Model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -71,6 +73,30 @@ public class PlayerRoster{
         updatePlayerStats();
     }
 
+    public void saveDataToFile() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(GAMERECORDFILE))) {
+            for (GameRecord gameRecord : gameRecords) {
+                // Retrieve player scores from the players map based on player names
+                float playerScore1 = players.get(gameRecord.getPlayer1()).getScore();
+                float playerScore2 = players.get(gameRecord.getPlayer2()).getScore();
+
+                // Format the game record data as per the specified format
+                String record = String.format("%s:%s:%d:%.2f:%.2f:%s%n",
+                        gameRecord.getPlayer1(),
+                        gameRecord.getPlayer2(),
+                        gameRecord.getOutcome(),
+                        playerScore1,
+                        playerScore2,
+                        gameRecord.getDate().format(DATE_TIME_FORMATTER));
+
+                // Write the formatted game record data to the file
+                bw.write(record);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void updatePlayerStats(){
         this.players.clear();
         // Iterate through each game record
@@ -131,22 +157,12 @@ public class PlayerRoster{
         }
     }
 
-    //For sorting our games by date.
-    public void sortGameRecordsByDate() {
-        // Create a custom comparator for GameRecord objects based on date
-        Comparator<GameRecord> dateComparator = new Comparator<GameRecord>() {
-            @Override
-            public int compare(GameRecord g1, GameRecord g2) {
-                return g1.getDate().compareTo(g2.getDate());
-            }
-        };
-
-        // Sort the gameRecords list using the custom comparator
-        Collections.sort(gameRecords, dateComparator);
-    }
-
     //print all games played so far.
     public void printAllGames(){
+        if(gameRecords.size() ==0){
+            System.out.println("No games played so far");
+            return;
+        }
         for(int i=0; i<gameRecords.size(); i++){
             System.out.println(gameRecords.get(i).getPlayer1()+" vs " +gameRecords.get(i).getPlayer2()+" at " +gameRecords.get(i).getDate());
         }
@@ -188,6 +204,7 @@ public class PlayerRoster{
             // Access the player's score from the player object
             float player1Score = player1.getScore();
             float player2Score = player2.getScore();
+
              // Get the current LocalDateTime
             LocalDateTime currentDateTime = LocalDateTime.now();
             

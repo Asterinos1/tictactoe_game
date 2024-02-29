@@ -1,24 +1,33 @@
 package Controller;
+import java.util.concurrent.TimeUnit;
+
 import Model.PlayerRoster;
 import View.MainWindow;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         PlayerRoster pr = new PlayerRoster();
-        pr.lodDataFromFile();
+        //pr.lodDataFromFile();
 
         pr.addNewPlayer("Asterinos");
-        pr.addNewPlayer("Giolddaskjhdkashdkjahdkjahkjsdhakjhasis");
-        pr.createNewGamerecord("Asterinos", "john", 1);
-        pr.createNewGamerecord("Asterinos", "john", 1);
-        pr.createNewGamerecord("Asterinos", "john", 1);
-        pr.createNewGamerecord("Asterinos", "john", 1);
-        pr.createNewGamerecord("Asterinos", "john", 1);
-        pr.createNewGamerecord("Asterinos", "john", 1);
+        pr.addNewPlayer("John");
+        pr.createNewGamerecord("Asterinos", "John", 0);
+        TimeUnit.SECONDS.sleep(1);
+        pr.printAllPlayersStats();
+        pr.createNewGamerecord("Asterinos", "John",1);
+        TimeUnit.SECONDS.sleep(1);
+        pr.printAllPlayersStats();
+        pr.createNewGamerecord("Asterinos", "John",1);
+        TimeUnit.SECONDS.sleep(1);
+        pr.printAllPlayersStats();
+        pr.createNewGamerecord("Asterinos", "John",2);
+        TimeUnit.SECONDS.sleep(1);
+        pr.printAllPlayersStats();
+        pr.createNewGamerecord("Asterinos", "John",0);
+        pr.printAllPlayersStats();
         pr.printAllGames();
         pr.printAllPlayersStats();
-        pr.getTop5RecentGamesForPlayer("john");
-        pr.getTop5GamesForPlayer("john");
+        pr.saveDataToFile();
         //main logic almost complete.
         /*
         Board brd = new Board();
@@ -40,7 +49,7 @@ public class App {
                     System.out.println(gmrcd.getGameInfo());
                 }
          */
-        MainWindow mw = new MainWindow(pr.getPlayersMap());
+        //MainWindow mw = new MainWindow(pr.getPlayersMap());
         //PlayerRoster pr = new PlayerRoster();
         //pr.loadPlayers()
 
