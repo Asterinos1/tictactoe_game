@@ -15,22 +15,14 @@ public class MainWindow extends JFrame {
     private HallOfFame hof;
     private BannerPanel bp;
     private GameBoard gb;
+    private PlayerPanel lpp;
+    private PlayerPanel rpp;
 
     public MainWindow(Board board, PlayerRoster pr){
         this.board = board;
         this.pr=pr;
-        setupMainWindow();
-        hof = new HallOfFame();
-        bp = new BannerPanel();
-        gb = new GameBoard();
 
-        this.add(bp);
-        this.add(new PlayerPanel("Left"));
-        this.add(new PlayerPanel("Right"));
-        this.hof.setVisible(false);
-        this.add(hof);
-        this.add(gb);
-        this.setVisible(true);
+        setupMainWindow();
 
         //set frame background colour.
         this.getContentPane().setBackground(new Color(255,251,182));
@@ -52,5 +44,21 @@ public class MainWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1200, 800);
         this.setLayout(null);
+
+        this.hof = new HallOfFame();
+        this.bp = new BannerPanel(this.pr);
+        this.gb = new GameBoard();
+        this.lpp = new PlayerPanel("Left");
+        this.rpp = new PlayerPanel("Right");
+
+        this.add(this.bp);
+        this.add(this.lpp);
+        this.add(this.rpp);
+
+        this.hof.setVisible(false);
+        this.add(this.hof);
+        this.add(this.gb);
+
+        this.setVisible(true);
     }
 }

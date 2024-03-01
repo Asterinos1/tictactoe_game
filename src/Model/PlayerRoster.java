@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PlayerRoster{
+
     private static final String GAMERECORDFILE = "gamerecord.txt";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     //Here we store a list of all the games ever played.
@@ -25,6 +26,9 @@ public class PlayerRoster{
     public PlayerRoster(){
         gameRecords = new ArrayList<>();
         players = new HashMap<>();
+
+        players.put("Haul", new Player("Haul"));
+        players.put("MrBean", new Player("MRBean"));
     }
 
     public void lodDataFromFile(){
@@ -45,6 +49,7 @@ public class PlayerRoster{
                 LocalDateTime dateTime = LocalDateTime.parse(parts[5], DATE_TIME_FORMATTER);
                 
                 String outcome1=" ";
+
                 if(outcome == 0){
                     outcome1 = "Tie";
                 }else  if(outcome == 1){
@@ -52,7 +57,6 @@ public class PlayerRoster{
                 }else if(outcome==2){
                     outcome1 = name2+"'s won";
                 }
-             
                 //Checking the data here.
                 System.out.println("Name1: " + name1);
                 System.out.println("Name2: " + name2);
@@ -69,7 +73,6 @@ public class PlayerRoster{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         updatePlayerStats();
     }
 
@@ -102,7 +105,6 @@ public class PlayerRoster{
         for (Player player : players.values()) {
             player.resetStats();
         }
-    
         // Iterate through each game record
         for (GameRecord gameRecord : gameRecords) {
             // Extract player names and outcome from the game record
@@ -175,9 +177,11 @@ public class PlayerRoster{
         if(!players.containsKey(name)  && name.length()<=20){
             Player player = new Player(name);
             players.put(name, player);
+            System.out.println("Player: " + name + " added successfully");
         }else{
-            System.out.println("Name"+ name+" rejected");
+            System.out.println("Name " + name + " rejected");
         }   
+        printCurrentRoaster();
     }
 
     //String player1, String player2, int oucome, float scr1, float scr2, LocalDateTime date
@@ -230,7 +234,6 @@ public class PlayerRoster{
                     return g2.getDate().compareTo(g1.getDate());
                 }
             });
-            
             // Retrieve the top 5 most recent game records for the player
             List<GameRecord> top5RecentGames = playerGameRecords.subList(0, Math.min(playerGameRecords.size(), 5));
             

@@ -1,4 +1,0 @@
-#name1:#name2:#outcome:#playerscore1:#playerscore2:#date 
-String, String, int, float, float, date
-
-#outcome(0 tie, 1 p1 wins, 2 p2 wins)
