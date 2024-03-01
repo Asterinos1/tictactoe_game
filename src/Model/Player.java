@@ -22,6 +22,14 @@ public class Player {
         this.score = 50*((2*(float)numOfVictories)+(float) numOfDraws)/((float) totalGamesPlayed);
     }
 
+    public void resetStats(){
+        setScore(0);
+        setNumOfDefeats(0);
+        setNumOfDraws(0);
+        setNumOfVictories(0);
+        setTotalGamesPlayed(0);
+    }
+
     public void incrementTotalGamesPlayed(){
         this.totalGamesPlayed++;
     }

@@ -1,6 +1,4 @@
 package Controller;
-import java.util.concurrent.TimeUnit;
-
 import Model.PlayerRoster;
 import View.MainWindow;
 
@@ -11,23 +9,21 @@ public class App {
 
         pr.addNewPlayer("Asterinos");
         pr.addNewPlayer("John");
-        pr.createNewGamerecord("Asterinos", "John", 0);
-        TimeUnit.SECONDS.sleep(1);
-        pr.printAllPlayersStats();
-        pr.createNewGamerecord("Asterinos", "John",1);
-        TimeUnit.SECONDS.sleep(1);
-        pr.printAllPlayersStats();
-        pr.createNewGamerecord("Asterinos", "John",1);
-        TimeUnit.SECONDS.sleep(1);
-        pr.printAllPlayersStats();
-        pr.createNewGamerecord("Asterinos", "John",2);
-        TimeUnit.SECONDS.sleep(1);
-        pr.printAllPlayersStats();
-        pr.createNewGamerecord("Asterinos", "John",0);
-        pr.printAllPlayersStats();
+        pr.addNewPlayer("George");
+        pr.addNewPlayer("Eleni");
+        pr.printCurrentRoaster();
+
+        pr.createNewGamerecord("Asterinos", "John", 0);    
+        pr.createNewGamerecord("Asterinos", "Eleni",1);       
+        pr.createNewGamerecord("John", "Asterinos",1);      
+        pr.createNewGamerecord("George", "Eleni",2);
+        pr.createNewGamerecord("Asterinos", "George",0);
+
         pr.printAllGames();
         pr.printAllPlayersStats();
+
         pr.saveDataToFile();
+        pr.findHallOfFame();
         //main logic almost complete.
         /*
         Board brd = new Board();
@@ -49,7 +45,7 @@ public class App {
                     System.out.println(gmrcd.getGameInfo());
                 }
          */
-        //MainWindow mw = new MainWindow(pr.getPlayersMap());
+        MainWindow mw = new MainWindow();
         //PlayerRoster pr = new PlayerRoster();
         //pr.loadPlayers()
 

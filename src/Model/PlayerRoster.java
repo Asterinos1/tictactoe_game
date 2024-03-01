@@ -97,63 +97,48 @@ public class PlayerRoster{
         }
     }
 
-    public void updatePlayerStats(){
-        this.players.clear();
+    public void updatePlayerStats() {
+        // Reset player stats before updating
+        for (Player player : players.values()) {
+            player.resetStats();
+        }
+    
         // Iterate through each game record
-        for (GameRecord gameRecord : this.gameRecords) {
-            // Extract player names from the game record
+        for (GameRecord gameRecord : gameRecords) {
+            // Extract player names and outcome from the game record
             String playerName1 = gameRecord.getPlayer1();
             String playerName2 = gameRecord.getPlayer2();
             int outcome = gameRecord.getOutcome();
-
-            // Check if player objects already exist for the player names
-            if (!this.players.containsKey(playerName1)) {
-                // If player object doesn't exist, create a new player object and add it to the players map
-                Player player1 = new Player(playerName1);     
-                this.players.put(playerName1, player1);
+    
+            // Update player stats based on the outcome of the game
+            Player player1 = players.get(playerName1);
+            Player player2 = players.get(playerName2);
+    
+            switch (outcome) {
+                case 0: // Tie
+                    player1.incrementDraws();
+                    player2.incrementDraws();
+                    break;
+                case 1: // Player 1 victory
+                    player1.incrementVictories();
+                    player2.incrementDefeats();
+                    break;
+                case 2: // Player 2 victory
+                    player1.incrementDefeats();
+                    player2.incrementVictories();
+                    break;
+                default:
+                    System.out.println("Invalid outcome");
+                    break;
             }
-
-            if (!this.players.containsKey(playerName2)) {
-                // If player object doesn't exist, create a new player object and add it to the players map
-                Player player2 = new Player(playerName2);
-                this.players.put(playerName2, player2);
-            }
-
-            //Adjust players stats here.
-            Player player1 = this.players.get(playerName1);
-            Player player2 = this.players.get(playerName2);
-
-            if (outcome == 0) {
-                // Tie
-                player1.incrementDraws();
-                player2.incrementDraws();
-
-                player1.incrementTotalGamesPlayed();
-                player2.incrementTotalGamesPlayed();
-
-                player1.updateScore();
-                player2.updateScore();
-            } else if (outcome == 1) {
-                // Player 1 victory
-                player1.incrementVictories();
-                player2.incrementDefeats();
-
-                player1.incrementTotalGamesPlayed();
-                player2.incrementTotalGamesPlayed();
-
-                player1.updateScore();
-                player2.updateScore();
-            } else if (outcome == 2) {
-                // Player 2 victory
-                player1.incrementDefeats();
-                player2.incrementVictories();
-
-                player1.incrementTotalGamesPlayed();
-                player2.incrementTotalGamesPlayed();
-                
-                player1.updateScore();
-                player2.updateScore();
-            }
+    
+            // Increment total games played for both players
+            player1.incrementTotalGamesPlayed();
+            player2.incrementTotalGamesPlayed();
+    
+            // Update player scores
+            player1.updateScore();
+            player2.updateScore();
         }
     }
 
@@ -211,6 +196,7 @@ public class PlayerRoster{
             gameRecords.add(new GameRecord(playerName1, playerName2, outcome, player1Score, player2Score, currentDateTime));
             updatePlayerStats();
         } else {
+            System.out.println("Game not saved!");
             // Player not found in the roster
             // or any other appropriate value or handle the case as needed
         }
@@ -324,20 +310,29 @@ public class PlayerRoster{
     }
 
     public List<Player> findHallOfFame() {
-        // Get the players map
-        Map<String, Player> playersMap = getPlayersMap();
-        
         // Create a list to store players
-        List<Player> playersList = new ArrayList<>(playersMap.values());
+        List<Player> playersList = new ArrayList<>(this.players.values());
         
         // Sort the players list based on score in descending order
         Collections.sort(playersList, (p1, p2) -> Float.compare(p2.getScore(), p1.getScore()));
+
+        for (Player player : playersList){
+            System.out.println(player.getName() + " " + player.getScore());
+        }
 
         // Return the top 10 players
         return playersList.subList(0, Math.min(playersList.size(), 10));
     }
 
+    public String[] findAllPlayersNames(){
+        String[] playersNames = new String[this.players.size()];
+        for(int i=0; i<this.players.size(); i++){
+            playersNames[i]=this.players.get(i).getName();
+        }
+        return playersNames;
+    }
+
     public Map<String, Player> getPlayersMap() {
-        return players;
+        return this.players;
     }
 }
