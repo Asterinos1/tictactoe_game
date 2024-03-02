@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Model.Player;
+import Model.PlayerRoster;
 
 public class PlayerPanel extends JPanel implements ActionListener {
     // Variable to track the readiness state
@@ -26,7 +27,14 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
     Map<String, Player> players;
 
-    public PlayerPanel(String position){
+    PlayerRoster pr;
+
+    public PlayerPanel(String position, PlayerRoster pr){
+        this.pr=pr;
+        setupPlayerPanel(position);
+    }
+
+    private void setupPlayerPanel(String position){
         this.setName(position);
         this.setBackground(Color.green);
         setBoundsOfPanel(position);
@@ -39,17 +47,12 @@ public class PlayerPanel extends JPanel implements ActionListener {
         this.add(SelectPlayerButton);
     }
 
-    public void setBoundsOfPanel(String position){
+    private void setBoundsOfPanel(String position){
         if(position=="Left"){
             this.setBounds(0,0,300,800);
         }else if(position=="Right"){
             this.setBounds(900,0,300,800);
         }
-    }
-
-    public void setupButtons(){
-        this.ReadyButton.setBounds(10, 110, 240, 50);
-        this.SelectPlayerButton.setBounds(10, 170, 240, 50);
     }
 
     public void selectPlayerFromRoaster(){

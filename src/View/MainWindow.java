@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import Model.*;
 
 public class MainWindow extends JFrame {
-    
     Board board = new Board();
     PlayerRoster pr = new PlayerRoster();
 
@@ -21,12 +20,8 @@ public class MainWindow extends JFrame {
     public MainWindow(Board board, PlayerRoster pr){
         this.board = board;
         this.pr=pr;
-
         setupMainWindow();
-
-        //set frame background colour.
-        this.getContentPane().setBackground(new Color(255,251,182));
-
+        
         // Add action listener to the "Hall of Fame" button in BannerPanel
         bp.HOFButton.addActionListener(new ActionListener() {
             @Override
@@ -45,11 +40,11 @@ public class MainWindow extends JFrame {
         this.setSize(1200, 800);
         this.setLayout(null);
 
-        this.hof = new HallOfFame();
+        this.hof = new HallOfFame(this.pr);
         this.bp = new BannerPanel(this.pr);
-        this.gb = new GameBoard();
-        this.lpp = new PlayerPanel("Left");
-        this.rpp = new PlayerPanel("Right");
+        this.gb = new GameBoard(this.board, this.pr);
+        this.lpp = new PlayerPanel("Left", this.pr);
+        this.rpp = new PlayerPanel("Right", this.pr);
 
         this.add(this.bp);
         this.add(this.lpp);
@@ -60,5 +55,23 @@ public class MainWindow extends JFrame {
         this.add(this.gb);
 
         this.setVisible(true);
+
+        this.getContentPane().setBackground(new Color(255,251,182));
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public PlayerRoster getPr() {
+        return pr;
+    }
+
+    public void setPr(PlayerRoster pr) {
+        this.pr = pr;
     }
 }

@@ -174,7 +174,7 @@ public class PlayerRoster{
 
     //Method to add a new player to the roster.
     public void addNewPlayer(String name){
-        if(!players.containsKey(name)  && name.length()<=20){
+        if(!players.containsKey(name)  && name.length()<=20 && name.length()!=0){
             Player player = new Player(name);
             players.put(name, player);
             System.out.println("Player: " + name + " added successfully");

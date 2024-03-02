@@ -9,6 +9,7 @@ public class Board {
 
     //Flag is used to alternate between player turns.
     private Boolean flag = true;
+
     //gameHasFinished checks whether the game is finished.
     private Boolean gameHasFinished=false;
     //winner -> 1: X victory.
@@ -217,5 +218,13 @@ public class Board {
 
     public void setMoves(int moves) {
         this.moves = moves;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 }

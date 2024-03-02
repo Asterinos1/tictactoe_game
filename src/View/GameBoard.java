@@ -14,25 +14,38 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Model.Board;
+import Model.PlayerRoster;
+
 public class GameBoard extends JPanel implements ActionListener{ 
     
     private static final int NUM_OF_BUTTONS = 9;
+
     private JButton[] buttons;
     private JPanel TurnDisplayer;
     private JPanel GameGrid;
 
-    public GameBoard() {
+    Board board;
+    PlayerRoster pr;
+
+    private boolean flag = true;
+
+    public GameBoard(Board board, PlayerRoster pr) {
+        this.board = board;
+        this.pr=pr;
+        setupGameBoard();
+        this.flag=this.board.getFlag();
+    }
+
+    public void setupGameBoard(){
         this.setBackground(Color.WHITE);
         this.setBounds(300, 100, 600, 700);
-        this.setLayout(new BorderLayout());
-        
+        this.setLayout(new BorderLayout()); 
         setupTurnDisplayerPanel();
         setupGameGridPanel();
-
-        this.add(TurnDisplayer, BorderLayout.NORTH);
-        this.add(GameGrid, BorderLayout.CENTER);
-
-        initializeButtons(GameGrid);
+        this.add(this.TurnDisplayer, BorderLayout.NORTH);
+        this.add(this.GameGrid, BorderLayout.CENTER);
+        initializeButtons(this.GameGrid);
         this.setVisible(true);
     }
 
