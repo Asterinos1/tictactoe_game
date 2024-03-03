@@ -32,6 +32,18 @@ public class MainWindow extends JFrame {
         });
     }
 
+    public void gameLogic(){
+        //In this function the game is to be implemented.
+
+        //Example:
+        //this.hof.updatePlayerRoster();
+
+        //actionsListerns to be added to the buttons through here.
+        //this.hof.PlayerButton.addActionListerner(this.)
+
+        //Just use this class to run everything.
+    }
+
     //Setup window settings, attach panels and set dimenions.
     public void setupMainWindow(){
         this.setTitle("Tic-Tac-Toe");
@@ -57,10 +69,6 @@ public class MainWindow extends JFrame {
         this.setVisible(true);
 
         this.getContentPane().setBackground(new Color(255,251,182));
-    }
-
-    public void gameLogic(){
-        
     }
 
     public Board getBoard() {

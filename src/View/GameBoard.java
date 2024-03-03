@@ -6,6 +6,7 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -84,9 +85,13 @@ public class GameBoard extends JPanel implements ActionListener{
     }
 
     private void initializeButtons(JPanel panel) {
+
         buttons = new JButton[NUM_OF_BUTTONS];
+        Font buttonFont = new Font("Arial", Font.PLAIN, 130);
+
         for (int i = 0; i < NUM_OF_BUTTONS; i++) {
-            buttons[i] = new JButton(String.valueOf(i + 1));
+            buttons[i] = new JButton();
+            buttons[i].setFont(buttonFont); // Set the font for the button text
             buttons[i].setBackground(Color.WHITE);
             buttons[i].setEnabled(true);
             buttons[i].setBorder(BorderFactory.createEmptyBorder());
@@ -110,9 +115,11 @@ public class GameBoard extends JPanel implements ActionListener{
                 // Update the button text based on the state of the corresponding position on the board
                 if (board.getBoard()[row][col] == 'X') {
                     turnLabel.setText("O's turn.");
+                    buttons[i].setForeground(Color.RED);
                     buttons[i].setText("X");
                 } else if (board.getBoard()[row][col] == 'O') {
                     turnLabel.setText("X's turn.");
+                    buttons[i].setForeground(Color.BLUE);
                     buttons[i].setText("O");
                 }
  
