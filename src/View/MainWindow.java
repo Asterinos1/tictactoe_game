@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-
 import Model.*;
 
 public class MainWindow extends JFrame {
-    Board board = new Board();
-    PlayerRoster pr = new PlayerRoster();
+    Board board;
+    PlayerRoster playerRoster;
 
     private HallOfFame hof;
     private BannerPanel bp;
@@ -17,9 +16,9 @@ public class MainWindow extends JFrame {
     private PlayerPanel lpp;
     private PlayerPanel rpp;
 
-    public MainWindow(Board board, PlayerRoster pr){
-        this.board = board;
-        this.pr=pr;
+    public MainWindow(){
+        this.board = new Board();
+        this.playerRoster= new PlayerRoster();
         setupMainWindow();
         
         // Add action listener to the "Hall of Fame" button in BannerPanel
@@ -33,6 +32,7 @@ public class MainWindow extends JFrame {
         });
     }
 
+    //Setup window settings, attach panels and set dimenions.
     public void setupMainWindow(){
         this.setTitle("Tic-Tac-Toe");
         this.setResizable(false);
@@ -40,11 +40,11 @@ public class MainWindow extends JFrame {
         this.setSize(1200, 800);
         this.setLayout(null);
 
-        this.hof = new HallOfFame(this.pr);
-        this.bp = new BannerPanel(this.pr);
-        this.gb = new GameBoard(this.board, this.pr);
-        this.lpp = new PlayerPanel("Left", this.pr);
-        this.rpp = new PlayerPanel("Right", this.pr);
+        this.hof = new HallOfFame(getPlayerRoster());
+        this.bp = new BannerPanel(getPlayerRoster());
+        this.gb = new GameBoard(getBoard(), getPlayerRoster());
+        this.lpp = new PlayerPanel("Left", getPlayerRoster());
+        this.rpp = new PlayerPanel("Right", getPlayerRoster());
 
         this.add(this.bp);
         this.add(this.lpp);
@@ -59,6 +59,10 @@ public class MainWindow extends JFrame {
         this.getContentPane().setBackground(new Color(255,251,182));
     }
 
+    public void gameLogic(){
+        
+    }
+
     public Board getBoard() {
         return board;
     }
@@ -67,11 +71,11 @@ public class MainWindow extends JFrame {
         this.board = board;
     }
 
-    public PlayerRoster getPr() {
-        return pr;
+    public PlayerRoster getPlayerRoster() {
+        return playerRoster;
     }
 
-    public void setPr(PlayerRoster pr) {
-        this.pr = pr;
+    public void setPlayerRoster(PlayerRoster pr) {
+        this.playerRoster = pr;
     }
 }

@@ -25,16 +25,16 @@ public class GameBoard extends JPanel implements ActionListener{
     private JPanel TurnDisplayer;
     private JPanel GameGrid;
 
+    private JLabel turnLabel;
+
     Board board;
     PlayerRoster pr;
-
-    private boolean flag = true;
 
     public GameBoard(Board board, PlayerRoster pr) {
         this.board = board;
         this.pr=pr;
         setupGameBoard();
-        this.flag=this.board.getFlag();
+        
     }
 
     public void setupGameBoard(){
@@ -53,7 +53,10 @@ public class GameBoard extends JPanel implements ActionListener{
         this.TurnDisplayer = new JPanel();
         this.TurnDisplayer.setBackground(Color.LIGHT_GRAY);
         this.TurnDisplayer.setPreferredSize(new Dimension(600, 100));
-        this.TurnDisplayer.add(new JLabel("Player move: "));
+
+        // Create and add turnLabel to display whose turn it is
+        turnLabel = new JLabel("X's turn");
+        this.TurnDisplayer.add(turnLabel);
     }
 
     private void setupGameGridPanel(){
@@ -93,11 +96,36 @@ public class GameBoard extends JPanel implements ActionListener{
     }
     
     @Override
-    public void actionPerformed(ActionEvent e) {
-        for (JButton button : buttons) {
-            if (e.getSource() == button) {
-                System.out.println("Button pressed: " + button.getText());
-                //button.setEnabled(false);
+    public void actionPerformed(ActionEvent e){
+        for (int i = 0; i < NUM_OF_BUTTONS; i++) {
+            if (e.getSource() == buttons[i]) {
+                
+                int row = i/3;
+                int col = i%3;
+
+                System.out.println("Button pressed: " +  buttons[i].getText() + " that is :"+ row + ", "+ col);
+
+                board.makeMove2(row, col);
+
+                // Update the button text based on the state of the corresponding position on the board
+                if (board.getBoard()[row][col] == 'X') {
+                    turnLabel.setText("O's turn.");
+                    buttons[i].setText("X");
+                } else if (board.getBoard()[row][col] == 'O') {
+                    turnLabel.setText("X's turn.");
+                    buttons[i].setText("O");
+                }
+ 
+                // Disable the button after setting the text
+                buttons[i].setEnabled(false);
+                
+                 // Check if the game has finished
+                if (board.gameHasFinished()) {
+                    // If the game has finished, disable all buttons
+                    for (JButton button : buttons) {
+                        button.setEnabled(false);
+                    }
+                }
             }
         }
     }

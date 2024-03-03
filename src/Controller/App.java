@@ -1,15 +1,12 @@
 package Controller;
-import Model.Board;
 import Model.PlayerRoster;
 import View.MainWindow;
 
 public class App {
     public static void main(String[] args) throws InterruptedException {
-        PlayerRoster pr = new PlayerRoster();
-        Board board = new Board();
         //pr.lodDataFromFile();
-        MainWindow mw = new MainWindow(board, pr);
-
+        MainWindow mw = new MainWindow();
+        
         /* pr.addNewPlayer("Asterinos");
         pr.addNewPlayer("John");
         pr.addNewPlayer("George");

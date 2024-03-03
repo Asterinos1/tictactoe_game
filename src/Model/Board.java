@@ -6,30 +6,24 @@ import java.util.Scanner;
 public class Board {
     private static final int MTRX_DMNSN = 3;
     private static final int MAXIMUM_MOVES= 9;
-
     //Flag is used to alternate between player turns.
     private Boolean flag = true;
-
     //gameHasFinished checks whether the game is finished.
     private Boolean gameHasFinished=false;
     //winner -> 1: X victory.
     //winner -> 2: O victory.
     //winner -> 0: stalemate.
     private int winner = 0;
-
     //total amount of moves that can be made.
     private int moves;
-
     //Creating board.
     private char board[][] = new char[MTRX_DMNSN][MTRX_DMNSN];
-    
-       //Contructor.
+
     public Board(){
         initializeBoard();
         this.moves=MAXIMUM_MOVES;
     }
     
-
     //Temporary scanner.
     Scanner scanner = new Scanner(System.in);
 
@@ -102,8 +96,37 @@ public class Board {
             }
             this.flag=true;
         }
-
     }   
+
+    //Temporary function that allows players to make moves.
+    public void makeMove2(int h, int w){
+        //Move at [h,w]
+        if(getFlag()==true){
+            System.out.println("Player1 (X) makes a move at "+ h + ", " + w);
+            if(isAvailablePosition(h, w)){
+                this.moves--;
+                setMatrixBlock(h, w, this.flag);
+                setFlag(!getFlag());
+            }
+            if(checkForVictory('X')){
+                System.out.println("Player1(X) has won!");
+                setWinner(1);
+            }
+
+        }else if(getFlag()==false){
+            System.out.println("Player2 (O) makes a move at " + h + ", " + w);
+            if(isAvailablePosition(h, w)){
+                this.moves--;
+                setMatrixBlock(h, w, this.flag);
+                setFlag(!getFlag());
+            }
+            
+            if(checkForVictory('O')){
+                System.out.println("Player2(O) has won!");
+                setWinner(2);
+            }
+        }
+    }
 
     //helper function of  makeMove()
     public void setMatrixBlock(int a, int b, boolean flag){
@@ -226,5 +249,9 @@ public class Board {
 
     public void setFlag(Boolean flag) {
         this.flag = flag;
+    }
+
+    public char[][] getBoard() {
+        return board;
     }
 }

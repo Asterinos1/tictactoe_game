@@ -329,8 +329,10 @@ public class PlayerRoster{
 
     public String[] findAllPlayersNames(){
         String[] playersNames = new String[this.players.size()];
-        for(int i=0; i<this.players.size(); i++){
-            playersNames[i]=this.players.get(i).getName();
+        int i = 0;
+        for(String playerName : this.players.keySet()){
+            playersNames[i] = playerName;
+            i++;
         }
         return playersNames;
     }

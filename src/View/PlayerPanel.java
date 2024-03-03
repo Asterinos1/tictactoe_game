@@ -27,10 +27,10 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
     Map<String, Player> players;
 
-    PlayerRoster pr;
+    PlayerRoster playerRoster;
 
     public PlayerPanel(String position, PlayerRoster pr){
-        this.pr=pr;
+        this.playerRoster=pr;
         setupPlayerPanel(position);
     }
 
@@ -56,7 +56,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
     }
 
     public void selectPlayerFromRoaster(){
-        JFrame playerRoaster = new JFrame();
+        JFrame playerRosterFrame = new JFrame();
         @SuppressWarnings("rawtypes")
         JComboBox availablePlayers = new JComboBox();
         JButton button = new JButton("Select");
@@ -64,31 +64,31 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
         availablePlayers.setSize(new Dimension(100, 100));
 
-        //putPlayersInsideComboBox(availablePlayers, playerList.getPlayers());
+        putPlayersInsideComboBox(availablePlayers, playerRoster.findAllPlayersNames());
 
-        playerRoaster.setTitle("Select "+ this.getName() + " player.");
-        playerRoaster.setResizable(false);
-        playerRoaster.setSize(300, 120);
-        playerRoaster.setLayout(new FlowLayout());
+        playerRosterFrame.setTitle("Select "+ this.getName() + " player.");
+        playerRosterFrame.setResizable(false);
+        playerRosterFrame.setSize(300, 120);
+        playerRosterFrame.setLayout(new FlowLayout());
 
-        playerRoaster.add(noteLabel);
-        playerRoaster.add(availablePlayers);
-        playerRoaster.add(button);
+        playerRosterFrame.add(noteLabel);
+        playerRosterFrame.add(availablePlayers);
+        playerRosterFrame.add(button);
 
-        playerRoaster.setVisible(true);
+        playerRosterFrame.setVisible(true);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public void putPlayersInsideComboBox(JComboBox box, ArrayList<Player> players){
-        for(int i=0; i<players.size(); i++){
-            box.addItem(players.get(i).getName());
+    public void putPlayersInsideComboBox(JComboBox box, String[] players){
+        for(int i=0; i<players.length; i++){
+            box.addItem(players[i]);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.SelectPlayerButton){
-            System.err.println("Hello player");
+            selectPlayerFromRoaster();
         } 
 
         if (e.getSource() == this.ReadyButton) {
