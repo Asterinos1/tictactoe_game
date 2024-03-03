@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,8 +24,10 @@ public class PlayerPanel extends JPanel implements ActionListener {
     JLabel playerX = new JLabel("X");
     JLabel palyer0 = new JLabel("O");
 
+    //Maps player names to their player objs.
     Map<String, Player> players;
 
+    //The roster.
     PlayerRoster playerRoster;
 
     public PlayerPanel(String position, PlayerRoster pr){
@@ -40,8 +41,8 @@ public class PlayerPanel extends JPanel implements ActionListener {
         setBoundsOfPanel(position);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 110));
 
-        this.SelectPlayerButton.addActionListener(this);
-        this.ReadyButton.addActionListener(this);
+        //this.SelectPlayerButton.addActionListener(this);
+        //this.ReadyButton.addActionListener(this);
 
         this.add(ReadyButton);
         this.add(SelectPlayerButton);
@@ -104,5 +105,14 @@ public class PlayerPanel extends JPanel implements ActionListener {
                 System.out.println(this.getName() + " not ready.");
             }
         }
+    }
+
+    //Setters, getters.
+    public PlayerRoster getPlayerRoster() {
+        return playerRoster;
+    }
+
+    public void setPlayerRoster(PlayerRoster playerRoster) {
+        this.playerRoster = playerRoster;
     }
 }

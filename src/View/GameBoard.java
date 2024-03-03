@@ -20,13 +20,13 @@ import Model.PlayerRoster;
 
 public class GameBoard extends JPanel implements ActionListener{ 
     
-    private static final int NUM_OF_BUTTONS = 9;
+    public static final int NUM_OF_BUTTONS = 9;
 
-    private JButton[] buttons;
-    private JPanel TurnDisplayer;
+    public JButton[] buttons;
+    public JPanel TurnDisplayer;
     private JPanel GameGrid;
 
-    private JLabel turnLabel;
+    public JLabel turnLabel;
 
     Board board;
     PlayerRoster pr;
@@ -85,18 +85,18 @@ public class GameBoard extends JPanel implements ActionListener{
     }
 
     private void initializeButtons(JPanel panel) {
-
         buttons = new JButton[NUM_OF_BUTTONS];
         Font buttonFont = new Font("Arial", Font.PLAIN, 130);
 
         for (int i = 0; i < NUM_OF_BUTTONS; i++) {
             buttons[i] = new JButton();
+            buttons[i].setFocusable(false);
             buttons[i].setFont(buttonFont); // Set the font for the button text
             buttons[i].setBackground(Color.WHITE);
             buttons[i].setEnabled(true);
             buttons[i].setBorder(BorderFactory.createEmptyBorder());
             panel.add(buttons[i]);
-            buttons[i].addActionListener(this);
+            //buttons[i].addActionListener(this);
         }
     }
     
@@ -135,5 +135,35 @@ public class GameBoard extends JPanel implements ActionListener{
                 }
             }
         }
+    }
+
+    public void resetBoard(){
+        board.initializeBoard();
+
+        for(int i=0; i<NUM_OF_BUTTONS; i++){
+            buttons[i].setText(" ");
+        }
+
+        board.gameHasFinished=false;
+        board.setMoves(Board.MAXIMUM_MOVES);
+
+        board.setFlag(true);
+        turnLabel.setText("X's turn.");
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+    public PlayerRoster getPr() {
+        return pr;
+    }
+
+    public void setPr(PlayerRoster pr) {
+        this.pr = pr;
     }
 }    

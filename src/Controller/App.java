@@ -1,5 +1,4 @@
 package Controller;
-import Model.PlayerRoster;
 import View.MainWindow;
 
 public class App {

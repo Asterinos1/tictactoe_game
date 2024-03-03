@@ -16,7 +16,7 @@ import Model.PlayerRoster;
 
 public class BannerPanel extends JPanel implements ActionListener{
 
-    PlayerRoster pr;
+    PlayerRoster playerRoster;
 
     ViewActions va = new ViewActions();
     JButton addPlayerButton = new JButton("Add player");
@@ -24,8 +24,8 @@ public class BannerPanel extends JPanel implements ActionListener{
     JButton QuitButton = new JButton("Quit");
 
     //Alt-constructor.
-    public BannerPanel(PlayerRoster pr){
-        this.pr=pr;
+    public BannerPanel(PlayerRoster playerRoster){
+        this.playerRoster=playerRoster;
         setupBannerPanel();
     }
 
@@ -41,8 +41,8 @@ public class BannerPanel extends JPanel implements ActionListener{
         this.HOFButton.setFocusable(false);
         this.QuitButton.setFocusable(false);
         
-        this.QuitButton.addActionListener(this);
-        this.addPlayerButton.addActionListener(this);
+        //this.QuitButton.addActionListener(this);
+        //this.addPlayerButton.addActionListener(this);
         this.add(this.addPlayerButton);
         this.add(this.HOFButton);
         this.add(this.QuitButton);
@@ -63,7 +63,7 @@ public class BannerPanel extends JPanel implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String playerName = textField.getText();
-                pr.addNewPlayer(playerName); // Call addNewPlayer method here
+                playerRoster.addNewPlayer(playerName); // Call addNewPlayer method here
                 apframe.dispose(); // Close the frame after adding the player
             }
         });
@@ -79,13 +79,27 @@ public class BannerPanel extends JPanel implements ActionListener{
         apframe.setVisible(true);
     }
 
+     //Action of quit button, terminates the program.
+     public static void quitButtonAction(){
+        System.exit(0);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.QuitButton){
-            ViewActions.quitButtonAction();
+           //ViewActions.quitButtonAction();
         }
         if(e.getSource()==this.addPlayerButton){
-            addPlayerToRoaster();
+            //addPlayerToRoaster();
         }
+    } 
+
+    //setters, getters.
+    public PlayerRoster getPlayerRoster() {
+        return playerRoster;
+    }
+
+    public void setPlayerRoster(PlayerRoster playerRoster) {
+        this.playerRoster = playerRoster;
     }
 }

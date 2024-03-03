@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 //This class represents the board's logic.
 public class Board {
-    private static final int MTRX_DMNSN = 3;
-    private static final int MAXIMUM_MOVES= 9;
+    public static final int MTRX_DMNSN = 3;
+    public static final int MAXIMUM_MOVES= 9;
     //Flag is used to alternate between player turns.
     private Boolean flag = true;
     //gameHasFinished checks whether the game is finished.
-    private Boolean gameHasFinished=false;
+    public Boolean gameHasFinished=false;
     //winner -> 1: X victory.
     //winner -> 2: O victory.
     //winner -> 0: stalemate.
