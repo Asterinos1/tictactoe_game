@@ -29,6 +29,7 @@ public class PlayerRoster{
 
         players.put("Haul", new Player("Haul"));
         players.put("MrBean", new Player("MRBean"));
+        updatePlayerStats();
     }
 
     public void lodDataFromFile(){

@@ -112,7 +112,7 @@ public class GameBoard extends JPanel implements ActionListener{
 
                 System.out.println("Button pressed: " +  buttons[i].getText() + " that is :"+ row + ", "+ col);
 
-                board.makeMove2(row, col);
+                board.makeMove(row, col);
 
                 // Update the button text based on the state of the corresponding position on the board
                 if (board.getBoard()[row][col] == 'X') {

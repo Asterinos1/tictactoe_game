@@ -3,6 +3,9 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -44,16 +47,31 @@ public class PlayerPanel extends JPanel implements ActionListener {
         this.setName(position);
         this.setBackground(Color.green);
         setBoundsOfPanel(position);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 110));
-        this.ReadyButton.setBackground(Color.WHITE);
 
+       // Set GridBagLayout manager
+        GridBagLayout layout = new GridBagLayout();
+        GridBagConstraints constraints = new GridBagConstraints();
+        this.setLayout(layout);
+
+        // Set constraints for ReadyButton
+        constraints.gridx = 0; // Column 0
+        constraints.gridy = 0; // Row 0
+        constraints.insets = new Insets(0, 0, 10, 0); // Bottom margin
+        constraints.anchor = GridBagConstraints.CENTER; // Center horizontally
+        this.add(ReadyButton, constraints);
+
+        // Set constraints for SelectPlayerButton
+        constraints.gridy = 1; // Row 1
+        this.add(SelectPlayerButton, constraints);
+
+        // Set constraints for playerName label
+        constraints.gridy = 2; // Row 2
+        constraints.insets = new Insets(10, 0, 0, 0); // Top margin
+        this.add(playerName, constraints);
+
+        // Make buttons non-focusable
         this.ReadyButton.setFocusable(false);
         this.SelectPlayerButton.setFocusable(false);
-        //this.SelectPlayerButton.addActionListener(this);
-        //this.ReadyButton.addActionListener(this);
-
-        this.add(ReadyButton);
-        this.add(SelectPlayerButton);
     }
 
     private void setBoundsOfPanel(String position){
@@ -83,9 +101,23 @@ public class PlayerPanel extends JPanel implements ActionListener {
         playerRosterFrame.add(noteLabel);
         playerRosterFrame.add(availablePlayers);
         playerRosterFrame.add(button);
-        playerRosterFrame.add(playerName);
 
         playerRosterFrame.setVisible(true);
+
+        // Add ActionListener to the button
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Get the selected item from the JComboBox
+                String selectedPlayer = (String) availablePlayers.getSelectedItem();
+                if (selectedPlayer != null) {
+                    // Do something with the selected player
+                    // For example, you can set the selected player's name to the playerName label in the player panel
+                    playerName.setText(selectedPlayer);
+                }
+            }
+        });
+
     }
 
     public void setPlayerName(String name){

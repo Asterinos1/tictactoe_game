@@ -20,12 +20,11 @@ public class MainWindow extends JFrame implements ActionListener{
     public MainWindow(){
         this.board = new Board();
         this.playerRoster= new PlayerRoster();
-        setupMainWindow();
 
+        setupMainWindow();
         //new
         enableButtonFunctionality();
-
-        
+    
         // Add action listener to the "Hall of Fame" button in BannerPanel
         bp.HOFButton.addActionListener(new ActionListener() {
             @Override
@@ -182,7 +181,7 @@ public class MainWindow extends JFrame implements ActionListener{
 
                 System.out.println("Button pressed: " +  this.gb.buttons[i].getText() + " that is :"+ row + ", "+ col);
 
-                board.makeMove2(row, col);
+                board.makeMove(row, col);
 
                 // Update the button text based on the state of the corresponding position on the board
                 if (board.getBoard()[row][col] == 'X') {

@@ -45,61 +45,13 @@ public class Board {
                 board[i][j]='E';
             }
         }
+
+        this.moves=MAXIMUM_MOVES;
     }
 
     //Temporary function that allows players to make moves.
-    public void makeMove(){
-        if(flag==true){
-            int a,b;
-            while(true){
-                System.out.println("Player1 (X) select block[A.B]");
-                String input = scanner.nextLine();
-                String[] parts = input.split("\\.");
-
-                a = Integer.parseInt(parts[0]);
-                b = Integer.parseInt(parts[1]);
-
-                if(isAvailablePosition(a, b)){
-                    break;
-                }
-            }
-            moves--;
-            setMatrixBlock(a, b, flag);
-
-            if(checkForVictory('X')){
-                //System.out.println("Player1(X) has won!");
-                setWinner(1);
-            }
-            this.flag=false;
-            
-        }else if(flag==false){
-
-            int a,b;
-            while(true){
-                System.out.println("Player2 (O) select block[A.B]");
-                String input = scanner.nextLine();
-                String[] parts = input.split("\\.");
-
-                a = Integer.parseInt(parts[0]);
-                b = Integer.parseInt(parts[1]);
-
-                if(isAvailablePosition(a, b)){
-                    break;
-                }
-            }
-            moves--;
-            setMatrixBlock(a, b, flag);
-            
-            if(checkForVictory('O')){
-                //System.out.println("Player2(O) has won!");
-                setWinner(2);
-            }
-            this.flag=true;
-        }
-    }   
-
-    //Temporary function that allows players to make moves.
-    public void makeMove2(int h, int w){
+    public void makeMove(int h, int w){
+        //new condition.
         //Move at [h,w]
         if(getFlag()==true){
             System.out.println("Player1 (X) makes a move at "+ h + ", " + w);
@@ -108,9 +60,10 @@ public class Board {
                 setMatrixBlock(h, w, this.flag);
                 setFlag(!getFlag());
             }
-            if(checkForVictory('X')){
+            if(checkForVictory('X') || moves==0){
                 System.out.println("Player1(X) has won!");
                 setWinner(1);
+                gameHasFinished=true;
             }
 
         }else if(getFlag()==false){
@@ -121,9 +74,10 @@ public class Board {
                 setFlag(!getFlag());
             }
             
-            if(checkForVictory('O')){
+            if(checkForVictory('O') || moves==0){
                 System.out.println("Player2(O) has won!");
                 setWinner(2);
+                gameHasFinished=true;
             }
         }
     }
