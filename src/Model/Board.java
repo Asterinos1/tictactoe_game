@@ -178,7 +178,7 @@ public class Board {
 
     //Returns true if the game has finished.
     //Returns false on the opposite.
-    public boolean gameHasFinished(){
+    public boolean isGameFinished(){
         return this.gameHasFinished;
     }
 

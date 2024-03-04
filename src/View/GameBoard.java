@@ -90,10 +90,12 @@ public class GameBoard extends JPanel implements ActionListener{
 
         for (int i = 0; i < NUM_OF_BUTTONS; i++) {
             buttons[i] = new JButton();
+            buttons[i].setOpaque(false);
             buttons[i].setFocusable(false);
+            buttons[i].setForeground(Color.BLACK); // Set the foreground color to black
             buttons[i].setFont(buttonFont); // Set the font for the button text
             buttons[i].setBackground(Color.WHITE);
-            buttons[i].setEnabled(true);
+            buttons[i].setEnabled(false);
             buttons[i].setBorder(BorderFactory.createEmptyBorder());
             panel.add(buttons[i]);
             //buttons[i].addActionListener(this);
@@ -115,19 +117,19 @@ public class GameBoard extends JPanel implements ActionListener{
                 // Update the button text based on the state of the corresponding position on the board
                 if (board.getBoard()[row][col] == 'X') {
                     turnLabel.setText("O's turn.");
-                    buttons[i].setForeground(Color.RED);
                     buttons[i].setText("X");
+                    buttons[i].setForeground(Color.RED);
                 } else if (board.getBoard()[row][col] == 'O') {
                     turnLabel.setText("X's turn.");
-                    buttons[i].setForeground(Color.BLUE);
                     buttons[i].setText("O");
+                    buttons[i].setForeground(Color.BLUE);
                 }
  
                 // Disable the button after setting the text
                 buttons[i].setEnabled(false);
                 
                  // Check if the game has finished
-                if (board.gameHasFinished()) {
+                if (board.isGameFinished()) {
                     // If the game has finished, disable all buttons
                     for (JButton button : buttons) {
                         button.setEnabled(false);
@@ -145,9 +147,11 @@ public class GameBoard extends JPanel implements ActionListener{
         }
 
         board.gameHasFinished=false;
+
         board.setMoves(Board.MAXIMUM_MOVES);
 
         board.setFlag(true);
+        
         turnLabel.setText("X's turn.");
     }
 

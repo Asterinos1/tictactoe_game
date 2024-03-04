@@ -16,7 +16,9 @@ import Model.PlayerRoster;
 
 public class PlayerPanel extends JPanel implements ActionListener {
     // Variable to track the readiness state
-    boolean isReady = false;
+    boolean isNotReady = true;
+
+    String position;
 
     //components.
     JButton ReadyButton = new JButton("Ready");
@@ -32,7 +34,9 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
     public PlayerPanel(String position, PlayerRoster pr){
         this.playerRoster=pr;
+        this.position=position;
         setupPlayerPanel(position);
+
     }
 
     private void setupPlayerPanel(String position){
@@ -41,6 +45,8 @@ public class PlayerPanel extends JPanel implements ActionListener {
         setBoundsOfPanel(position);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 110));
 
+        this.ReadyButton.setFocusable(false);
+        this.SelectPlayerButton.setFocusable(false);
         //this.SelectPlayerButton.addActionListener(this);
         //this.ReadyButton.addActionListener(this);
 
@@ -86,6 +92,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
         }
     }
 
+    /* */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.SelectPlayerButton){
@@ -94,15 +101,15 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
         if (e.getSource() == this.ReadyButton) {
             // Toggle readiness state
-            isReady = !isReady;
+            isNotReady = !isNotReady;
 
             // Change button color based on readiness state
-            if (isReady) {
+            if (!isNotReady) {
                 ReadyButton.setBackground(Color.GRAY);
-                System.out.println(this.getName() + " is ready.");
+                System.out.println(position + " is ready.");
             } else {
                 ReadyButton.setBackground(Color.WHITE); // Reset to default color
-                System.out.println(this.getName() + " not ready.");
+                System.out.println(position + " not ready.");
             }
         }
     }

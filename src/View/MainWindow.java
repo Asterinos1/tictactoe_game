@@ -3,7 +3,6 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import Model.*;
@@ -17,6 +16,7 @@ public class MainWindow extends JFrame implements ActionListener{
     private GameBoard gb;
     private PlayerPanel lpp;
     private PlayerPanel rpp;
+    
 
     public MainWindow(){
         this.board = new Board();
@@ -89,7 +89,7 @@ public class MainWindow extends JFrame implements ActionListener{
         this.lpp.SelectPlayerButton.addActionListener(this);
         //Right
         this.rpp.ReadyButton.addActionListener(this);
-        this.lpp.ReadyButton.addActionListener(this);
+        this.rpp.SelectPlayerButton.addActionListener(this);
 
         //GameBoard.
         for(int i=0; i<GameBoard.NUM_OF_BUTTONS; i++){
@@ -105,9 +105,26 @@ public class MainWindow extends JFrame implements ActionListener{
         }
         if(e.getSource()==this.bp.addPlayerButton){
             bp.addPlayerToRoaster();
+            gb.setPr(bp.getPlayerRoster());
+            hof.updatePlayerRoster(bp.getPlayerRoster());
+            lpp.setPlayerRoster(bp.getPlayerRoster());
+            rpp.setPlayerRoster(bp.getPlayerRoster());
         }
 
+        //====================================================================================//
+
         //PlayerPanels.
+        boolean leftReady = this.lpp.isNotReady;
+        boolean rightReady = this.rpp.isNotReady;
+
+        if (leftReady && rightReady) {
+            // Enable buttons in GameBoard
+            for (JButton button : this.gb.buttons) {
+                button.setEnabled(true);
+            }
+        }
+
+
         //Left.
         if(e.getSource() == this.lpp.SelectPlayerButton){
             this.lpp.selectPlayerFromRoaster();
@@ -115,17 +132,18 @@ public class MainWindow extends JFrame implements ActionListener{
 
         if (e.getSource() == this.lpp.ReadyButton) {
             // Toggle readiness state
-            this.lpp.isReady = !(this.lpp.isReady);
+            this.lpp.isNotReady = !(this.lpp.isNotReady);
 
             // Change button color based on readiness state
-            if (this.lpp.isReady) {
+            if (!this.lpp.isNotReady) {
                 this.lpp.ReadyButton.setBackground(Color.GRAY);
-                System.out.println(this.getName() + " is ready.");
+                System.out.println(this.lpp.position + " is ready.");
             } else {
                 this.lpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
-                System.out.println(this.getName() + " not ready.");
+                System.out.println(this.lpp.position + " not ready.");
             }
         }
+
         //Right.
         if(e.getSource() == this.rpp.SelectPlayerButton){
             this.rpp.selectPlayerFromRoaster();
@@ -133,18 +151,20 @@ public class MainWindow extends JFrame implements ActionListener{
 
         if (e.getSource() == this.rpp.ReadyButton) {
             // Toggle readiness state
-            this.rpp.isReady = !(this.rpp.isReady);
+            this.rpp.isNotReady = !(this.rpp.isNotReady);
 
             // Change button color based on readiness state
-            if (this.rpp.isReady) {
+            if (!this.rpp.isNotReady) {
                 this.rpp.ReadyButton.setBackground(Color.GRAY);
-                System.out.println(this.getName() + " is ready.");
+                System.out.println(this.rpp.position + " is ready.");
             } else {
                 this.rpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
-                System.out.println(this.getName() + " not ready.");
+                System.out.println(this.rpp.position + " not ready.");
             }
         }
         //end of player panel.
+
+        //====================================================================================//
 
         //GameBoard.
         for (int i = 0; i < GameBoard.NUM_OF_BUTTONS; i++) {
@@ -160,19 +180,19 @@ public class MainWindow extends JFrame implements ActionListener{
                 // Update the button text based on the state of the corresponding position on the board
                 if (board.getBoard()[row][col] == 'X') {
                     this.gb.turnLabel.setText("O's turn.");
-                    this.gb.buttons[i].setForeground(Color.RED);
                     this.gb.buttons[i].setText("X");
+                    this.gb.buttons[i].setForeground(Color.RED);
                 } else if (board.getBoard()[row][col] == 'O') {
                     this.gb.turnLabel.setText("X's turn.");
-                    this.gb.buttons[i].setForeground(Color.BLUE);
                     this.gb.buttons[i].setText("O");
+                    this.gb.buttons[i].setForeground(Color.BLUE);   
                 }
  
                 // Disable the button after setting the text
                 this.gb.buttons[i].setEnabled(false);
                 
                  // Check if the game has finished
-                if (board.gameHasFinished()) {
+                if (board.isGameFinished()) {
 
                     if(board.getWinner()==0){
                         this.gb.turnLabel.setText("Game is a Tie.");
@@ -182,12 +202,21 @@ public class MainWindow extends JFrame implements ActionListener{
                         this.gb.turnLabel.setText("O winner.");
                     }
 
+                        
                     // If the game has finished, disable all buttons
                     for (JButton button : this.gb.buttons) {
                         button.setEnabled(false);
                     }
+                    
+                    //Reseting board.
+                    gb.resetBoard();
 
-                    //gb.resetBoard();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
 
                     for (JButton button : this.gb.buttons) {
                         button.setEnabled(true);

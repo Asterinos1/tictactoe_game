@@ -7,10 +7,10 @@ import Model.PlayerRoster;
 
 public class HallOfFame extends JPanel {
     private JLabel ScreenTitle = new JLabel("Hall of fame");
-    private PlayerRoster pr;
+    private PlayerRoster playerRoster;
     
     public HallOfFame(PlayerRoster pr){
-        this.pr=pr;
+        this.playerRoster=pr;
         setupHallOfFame();
     }
 
@@ -21,6 +21,6 @@ public class HallOfFame extends JPanel {
     }
 
     public void updatePlayerRoster(PlayerRoster pr){
-        this.pr=pr;
+        this.playerRoster=pr;
     }
 }
