@@ -17,7 +17,6 @@ public class MainWindow extends JFrame implements ActionListener{
     private PlayerPanel lpp;
     private PlayerPanel rpp;
     
-
     public MainWindow(){
         this.board = new Board();
         this.playerRoster= new PlayerRoster();
@@ -160,6 +159,10 @@ public class MainWindow extends JFrame implements ActionListener{
             for (JButton button : this.gb.buttons) {
                 button.setEnabled(true);
             }
+            this.bp.HOFButton.setEnabled(false);
+
+            this.lpp.SelectPlayerButton.setEnabled(false);
+            this.rpp.SelectPlayerButton.setEnabled(false);
         } else {
             // Disable buttons in GameBoard
             for (JButton button : this.gb.buttons) {
@@ -221,6 +224,13 @@ public class MainWindow extends JFrame implements ActionListener{
 
                     this.rpp.ReadyButton.setBackground(Color.WHITE);
                     this.lpp.ReadyButton.setBackground(Color.WHITE);
+
+                    //Reset select buttons.
+                    this.lpp.SelectPlayerButton.setEnabled(true);
+                    this.rpp.SelectPlayerButton.setEnabled(true);
+
+                    //Reset HOF Button.
+                    this.bp.HOFButton.setEnabled(true);
 
                     for (JButton button : this.gb.buttons) {
                         button.setEnabled(false);

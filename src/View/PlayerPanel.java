@@ -25,6 +25,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
     JButton SelectPlayerButton = new JButton("Select player");
     JLabel playerX = new JLabel("X");
     JLabel palyer0 = new JLabel("O");
+    JLabel playerName = new JLabel(" ");
 
     //Maps player names to their player objs.
     Map<String, Player> players;
@@ -82,8 +83,13 @@ public class PlayerPanel extends JPanel implements ActionListener {
         playerRosterFrame.add(noteLabel);
         playerRosterFrame.add(availablePlayers);
         playerRosterFrame.add(button);
+        playerRosterFrame.add(playerName);
 
         playerRosterFrame.setVisible(true);
+    }
+
+    public void setPlayerName(String name){
+        this.playerName.setText(name);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
