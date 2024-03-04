@@ -113,29 +113,19 @@ public class MainWindow extends JFrame implements ActionListener{
 
         //====================================================================================//
 
-        //PlayerPanels.
-        boolean leftReady = this.lpp.isNotReady;
-        boolean rightReady = this.rpp.isNotReady;
-
-        if (leftReady && rightReady) {
-            // Enable buttons in GameBoard
-            for (JButton button : this.gb.buttons) {
-                button.setEnabled(true);
-            }
-        }
-
+        // PlayerPanel
 
         //Left.
-        if(e.getSource() == this.lpp.SelectPlayerButton){
+        if (e.getSource() == this.lpp.SelectPlayerButton) {
             this.lpp.selectPlayerFromRoaster();
-        } 
+        }
 
         if (e.getSource() == this.lpp.ReadyButton) {
             // Toggle readiness state
-            this.lpp.isNotReady = !(this.lpp.isNotReady);
+            this.lpp.isReady = !(this.lpp.isReady);
 
             // Change button color based on readiness state
-            if (!this.lpp.isNotReady) {
+            if (this.lpp.isReady) {
                 this.lpp.ReadyButton.setBackground(Color.GRAY);
                 System.out.println(this.lpp.position + " is ready.");
             } else {
@@ -145,21 +135,35 @@ public class MainWindow extends JFrame implements ActionListener{
         }
 
         //Right.
-        if(e.getSource() == this.rpp.SelectPlayerButton){
+        if (e.getSource() == this.rpp.SelectPlayerButton) {
             this.rpp.selectPlayerFromRoaster();
-        } 
+        }
 
         if (e.getSource() == this.rpp.ReadyButton) {
             // Toggle readiness state
-            this.rpp.isNotReady = !(this.rpp.isNotReady);
+            this.rpp.isReady = !(this.rpp.isReady);
 
             // Change button color based on readiness state
-            if (!this.rpp.isNotReady) {
+            if (this.rpp.isReady) {
                 this.rpp.ReadyButton.setBackground(Color.GRAY);
                 System.out.println(this.rpp.position + " is ready.");
             } else {
                 this.rpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
                 System.out.println(this.rpp.position + " not ready.");
+            }
+        }
+
+        // Check if both players are ready
+        if (this.lpp.isReady && this.rpp.isReady) {
+            System.out.println("Both ready.");
+            // Enable buttons in GameBoard
+            for (JButton button : this.gb.buttons) {
+                button.setEnabled(true);
+            }
+        } else {
+            // Disable buttons in GameBoard
+            for (JButton button : this.gb.buttons) {
+                button.setEnabled(false);
             }
         }
         //end of player panel.
@@ -211,15 +215,15 @@ public class MainWindow extends JFrame implements ActionListener{
                     //Reseting board.
                     gb.resetBoard();
 
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e1) {
-                        // TODO Auto-generated catch block
-                        e1.printStackTrace();
-                    }
+                    //Reset ready buttons.
+                    this.rpp.isReady = false;
+                    this.lpp.isReady = false;
+
+                    this.rpp.ReadyButton.setBackground(Color.WHITE);
+                    this.lpp.ReadyButton.setBackground(Color.WHITE);
 
                     for (JButton button : this.gb.buttons) {
-                        button.setEnabled(true);
+                        button.setEnabled(false);
                     }
                 }
             }

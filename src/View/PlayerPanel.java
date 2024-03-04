@@ -16,7 +16,7 @@ import Model.PlayerRoster;
 
 public class PlayerPanel extends JPanel implements ActionListener {
     // Variable to track the readiness state
-    boolean isNotReady = true;
+    boolean isReady = false;
 
     String position;
 
@@ -44,6 +44,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
         this.setBackground(Color.green);
         setBoundsOfPanel(position);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 110));
+        this.ReadyButton.setBackground(Color.WHITE);
 
         this.ReadyButton.setFocusable(false);
         this.SelectPlayerButton.setFocusable(false);
@@ -101,10 +102,10 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
         if (e.getSource() == this.ReadyButton) {
             // Toggle readiness state
-            isNotReady = !isNotReady;
+            isReady = !isReady;
 
             // Change button color based on readiness state
-            if (!isNotReady) {
+            if (!isReady) {
                 ReadyButton.setBackground(Color.GRAY);
                 System.out.println(position + " is ready.");
             } else {
