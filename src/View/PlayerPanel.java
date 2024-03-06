@@ -8,12 +8,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import Model.Player;
 import Model.PlayerRoster;
 
@@ -26,12 +26,11 @@ public class PlayerPanel extends JPanel implements ActionListener {
     //components.
     JButton ReadyButton = new JButton("Ready");
     JButton SelectPlayerButton = new JButton("Select player");
-    JLabel playerX = new JLabel("X");
-    JLabel palyer0 = new JLabel("O");
-    JLabel playerName = new JLabel(" ");
+    //Player name.
+    JLabel playerNameLabel = new JLabel(" ");
+    //Player stats.
+    JLabel playerStatsLabel = new JLabel("Total Wins: 0 | Total Losses: 0 | Total Draws: 0 | Score: 0");
 
-    //Maps player names to their player objs.
-    Map<String, Player> players;
 
     //The roster.
     PlayerRoster playerRoster;
@@ -43,32 +42,51 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
     }
 
-    private void setupPlayerPanel(String position){
+    private void setupPlayerPanel(String position) {
         this.setName(position);
         this.setBackground(Color.green);
         setBoundsOfPanel(position);
-
-       // Set GridBagLayout manager
+    
+        // Set GridBagLayout manager
         GridBagLayout layout = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
         this.setLayout(layout);
-
+    
         // Set constraints for ReadyButton
         constraints.gridx = 0; // Column 0
         constraints.gridy = 0; // Row 0
         constraints.insets = new Insets(0, 0, 10, 0); // Bottom margin
         constraints.anchor = GridBagConstraints.CENTER; // Center horizontally
         this.add(ReadyButton, constraints);
-
+    
         // Set constraints for SelectPlayerButton
         constraints.gridy = 1; // Row 1
         this.add(SelectPlayerButton, constraints);
-
+    
         // Set constraints for playerName label
         constraints.gridy = 2; // Row 2
         constraints.insets = new Insets(10, 0, 0, 0); // Top margin
-        this.add(playerName, constraints);
-
+        this.add(playerNameLabel, constraints);
+    
+        // Add labels for player stats vertically
+        constraints.gridy = 3; // Start from Row 3
+        constraints.insets = new Insets(10, 0, 0, 0); // Top margin
+    
+        JLabel totalVictoriesLabel = new JLabel("Total Victories: ");
+        this.add(totalVictoriesLabel, constraints);
+    
+        constraints.gridy++;
+        JLabel totalDefeatsLabel = new JLabel("Total Defeats: ");
+        this.add(totalDefeatsLabel, constraints);
+    
+        constraints.gridy++;
+        JLabel totalDrawsLabel = new JLabel("Total Draws: ");
+        this.add(totalDrawsLabel, constraints);
+    
+        constraints.gridy++;
+        JLabel playerScoreLabel = new JLabel("Player Score: ");
+        this.add(playerScoreLabel, constraints);
+    
         // Make buttons non-focusable
         this.ReadyButton.setFocusable(false);
         this.SelectPlayerButton.setFocusable(false);
@@ -109,11 +127,19 @@ public class PlayerPanel extends JPanel implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Get the selected item from the JComboBox
-                String selectedPlayer = (String) availablePlayers.getSelectedItem();
-                if (selectedPlayer != null) {
-                    // Do something with the selected player
-                    // For example, you can set the selected player's name to the playerName label in the player panel
-                    playerName.setText(selectedPlayer);
+                String selectedPlayerName = (String) availablePlayers.getSelectedItem();
+                if (selectedPlayerName != null) {
+                    // Get the selected player from the player roster
+                    Player selectedPlayer = playerRoster.findPlayerByName(selectedPlayerName);
+                    if (selectedPlayer != null) {
+                        // Update player name label
+                        playerNameLabel.setText(selectedPlayer.getName());
+                        // Update player stats label
+                        playerStatsLabel.setText("Total Wins: " + selectedPlayer.getNumOfVictories() +
+                                " | Total Losses: " + selectedPlayer.getNumOfDefeats() +
+                                " | Total Draws: " + selectedPlayer.getNumOfDraws() +
+                                " | Score: " + selectedPlayer.getScore());
+                    }
                 }
             }
         });
@@ -121,7 +147,7 @@ public class PlayerPanel extends JPanel implements ActionListener {
     }
 
     public void setPlayerName(String name){
-        this.playerName.setText(name);
+        this.playerNameLabel.setText(name);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

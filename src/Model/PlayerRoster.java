@@ -313,6 +313,18 @@ public class PlayerRoster{
         }
     }
 
+    //New
+    public Player findPlayerByName(String playerName) {
+        // Check if the playerName exists in the players map
+        if (players.containsKey(playerName)) {
+            // Return the player object associated with the playerName
+            return players.get(playerName);
+        } else {
+            // Player not found, return null or handle the case as needed
+            return null;
+        }
+    }
+
     public List<Player> findHallOfFame() {
         // Create a list to store players
         List<Player> playersList = new ArrayList<>(this.players.values());
