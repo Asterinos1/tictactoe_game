@@ -22,8 +22,11 @@ public class HallOfFame extends JPanel {
     private void setupHallOfFame() {
         this.setBackground(Color.WHITE);
         this.setBounds(300, 100, 600, 700);
+
+
+        
         this.screenTitle.setFont(new Font("Arial", Font.BOLD, 40));
-        this.add(screenTitle);
+        //this.add(screenTitle);
 
         playerListPanel = new JPanel();
         playerListPanel.setBackground(Color.WHITE);
@@ -36,8 +39,11 @@ public class HallOfFame extends JPanel {
     private void displayPlayers() {
         List<Player> players = playerRoster.findHallOfFame(); // Get list of players from PlayerRoster
         int index = 1;
+        
+        playerListPanel.add(screenTitle);
+
         for (Player player : players) {
-            JLabel playerLabel = new JLabel(index + player.getName() + " - Score: " + player.getScore());
+            JLabel playerLabel = new JLabel(index + ". "+ player.getName() + "   " + player.getScore());
             playerLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set a larger font size, you can adjust the font and size as needed
             playerListPanel.add(playerLabel);
             index++;
