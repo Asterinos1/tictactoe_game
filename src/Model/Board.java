@@ -126,6 +126,8 @@ public class Board {
         }else if(this.board[0][2]==a && this.board[1][1]==a && this.board[2][0]==a){
             this.gameHasFinished=true;
             return true;
+        }else if(moves==0){
+            return false;
         }
         return false;
     }

@@ -217,9 +217,7 @@ public class PlayerRoster{
 
     public void getTop5RecentGamesForPlayer(String playerName) {
         // Check if the player exists in the players map
-        if (players.containsKey(playerName)) {
-            Player player = players.get(playerName);
-            
+        if (players.containsKey(playerName)) {    
             // Retrieve the player's game records
             List<GameRecord> playerGameRecords = new ArrayList<>();
             for (GameRecord gameRecord : gameRecords) {
@@ -252,7 +250,6 @@ public class PlayerRoster{
     public void getTop5GamesForPlayer(String playerName) {
         // Check if the player exists in the players map
         if (players.containsKey(playerName)) {
-            Player player = players.get(playerName);
 
             // Retrieve the player's game records
             List<GameRecord> playerGameRecords = new ArrayList<>();
@@ -332,9 +329,12 @@ public class PlayerRoster{
         // Sort the players list based on score in descending order
         Collections.sort(playersList, (p1, p2) -> Float.compare(p2.getScore(), p1.getScore()));
 
-        for (Player player : playersList){
+        /*
+         for (Player player : playersList){
             System.out.println(player.getName() + " " + player.getScore());
         }
+
+        */
 
         // Return the top 10 players
         return playersList.subList(0, Math.min(playersList.size(), 10));

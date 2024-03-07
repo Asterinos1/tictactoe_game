@@ -56,7 +56,8 @@ public class GameBoard extends JPanel implements ActionListener{
         this.TurnDisplayer.setPreferredSize(new Dimension(600, 100));
 
         // Create and add turnLabel to display whose turn it is
-        turnLabel = new JLabel("X's turn");
+        turnLabel = new JLabel("X's turn.");
+        turnLabel.setFont(new Font("Arial", Font.BOLD, 50));
         this.TurnDisplayer.add(turnLabel);
     }
 

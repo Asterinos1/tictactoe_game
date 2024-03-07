@@ -153,7 +153,7 @@ public class MainWindow extends JFrame implements ActionListener{
 
         // Check if both players are ready
         if (this.lpp.isReady && this.rpp.isReady) {
-            System.out.println("Both ready.");
+            //System.out.println("The game can start.");
             // Enable buttons in GameBoard
             for (JButton button : this.gb.buttons) {
                 button.setEnabled(true);
