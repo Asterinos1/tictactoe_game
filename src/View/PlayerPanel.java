@@ -29,8 +29,13 @@ public class PlayerPanel extends JPanel implements ActionListener {
     //Player name.
     JLabel playerNameLabel = new JLabel(" ");
     //Player stats.
-    JLabel playerStatsLabel = new JLabel("Total Wins: 0 | Total Losses: 0 | Total Draws: 0 | Score: 0");
+    JLabel totalVictoriesLabel;
+    JLabel totalDefeatsLabel;
+    JLabel totalDrawsLabel;
+    JLabel playerScoreLabel;
+    JLabel totalGamesPlayedLabel;
 
+    String PlayerNameHere;
 
     //The roster.
     PlayerRoster playerRoster;
@@ -71,21 +76,26 @@ public class PlayerPanel extends JPanel implements ActionListener {
         // Add labels for player stats vertically
         constraints.gridy = 3; // Start from Row 3
         constraints.insets = new Insets(10, 0, 0, 0); // Top margin
-    
-        JLabel totalVictoriesLabel = new JLabel("Total Victories: ");
+
+
+        this.totalVictoriesLabel = new JLabel("Total Victories: ");
         this.add(totalVictoriesLabel, constraints);
     
         constraints.gridy++;
-        JLabel totalDefeatsLabel = new JLabel("Total Defeats: ");
+        this.totalDefeatsLabel = new JLabel("Total Defeats: ");
         this.add(totalDefeatsLabel, constraints);
     
         constraints.gridy++;
-        JLabel totalDrawsLabel = new JLabel("Total Draws: ");
+        this.totalDrawsLabel = new JLabel("Total Draws: ");
         this.add(totalDrawsLabel, constraints);
     
         constraints.gridy++;
-        JLabel playerScoreLabel = new JLabel("Player Score: ");
+        this.playerScoreLabel = new JLabel("Player Score: ");
         this.add(playerScoreLabel, constraints);
+
+        constraints.gridy++;
+        this.totalGamesPlayedLabel = new JLabel("Total Games Played: ");
+        this.add(totalGamesPlayedLabel, constraints);
     
         // Make buttons non-focusable
         this.ReadyButton.setFocusable(false);
@@ -132,18 +142,22 @@ public class PlayerPanel extends JPanel implements ActionListener {
                     // Get the selected player from the player roster
                     Player selectedPlayer = playerRoster.findPlayerByName(selectedPlayerName);
                     if (selectedPlayer != null) {
+                        //New.
+                        PlayerNameHere = selectedPlayer.getName();
                         // Update player name label
                         playerNameLabel.setText(selectedPlayer.getName());
                         // Update player stats label
-                        playerStatsLabel.setText("Total Wins: " + selectedPlayer.getNumOfVictories() +
-                                " | Total Losses: " + selectedPlayer.getNumOfDefeats() +
-                                " | Total Draws: " + selectedPlayer.getNumOfDraws() +
-                                " | Score: " + selectedPlayer.getScore());
+                        totalGamesPlayedLabel.setText("Total Games Played: " + selectedPlayer.getTotalGamesPlayed());
+                        totalVictoriesLabel.setText("Total Victories: " + selectedPlayer.getNumOfVictories());
+                        totalDrawsLabel.setText("Total Draws: " + selectedPlayer.getNumOfDraws());
+                        totalDefeatsLabel.setText("Total Defeats: " + selectedPlayer.getNumOfDefeats());
+                        playerScoreLabel.setText("Player Score: " + selectedPlayer.getScore());
                     }
                 }
+                // Close the playerRosterFrame
+                playerRosterFrame.dispose();
             }
         });
-
     }
 
     public void setPlayerName(String name){
@@ -186,5 +200,13 @@ public class PlayerPanel extends JPanel implements ActionListener {
 
     public void setPlayerRoster(PlayerRoster playerRoster) {
         this.playerRoster = playerRoster;
+    }
+
+    public String getPlayerNameHere() {
+        return PlayerNameHere;
+    }
+
+    public void setPlayerNameHere(String playerNameHere) {
+        PlayerNameHere = playerNameHere;
     }
 }

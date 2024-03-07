@@ -1,6 +1,5 @@
 package Model;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 //This class represents the board's logic.
 public class Board {
@@ -23,9 +22,6 @@ public class Board {
         initializeBoard();
         this.moves=MAXIMUM_MOVES;
     }
-    
-    //Temporary scanner.
-    Scanner scanner = new Scanner(System.in);
 
     //print current board state.
     public void printBoard(){

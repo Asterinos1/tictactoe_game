@@ -103,6 +103,7 @@ public class MainWindow extends JFrame implements ActionListener{
         }
         if(e.getSource()==this.bp.addPlayerButton){
             bp.addPlayerToRoaster();
+            playerRoster=bp.getPlayerRoster();
             gb.setPr(bp.getPlayerRoster());
             hof.updatePlayerRoster(bp.getPlayerRoster());
             lpp.setPlayerRoster(bp.getPlayerRoster());
@@ -208,6 +209,12 @@ public class MainWindow extends JFrame implements ActionListener{
                         this.gb.turnLabel.setText("O winner.");
                     }
 
+                    playerRoster.createNewGamerecord(this.lpp.getPlayerNameHere(),this.rpp.getPlayerNameHere(),board.getWinner());
+
+                    this.hof.updatePlayerRoster(playerRoster);
+                    this.bp.setPlayerRoster(playerRoster);
+                    this.rpp.setPlayerRoster(playerRoster);
+                    this.lpp.setPlayerRoster(playerRoster);
                         
                     // If the game has finished, disable all buttons
                     for (JButton button : this.gb.buttons) {

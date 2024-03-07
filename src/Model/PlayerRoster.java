@@ -28,7 +28,7 @@ public class PlayerRoster{
         players = new HashMap<>();
 
         players.put("Haul", new Player("Haul"));
-        players.put("MrBean", new Player("MRBean"));
+        players.put("MrBean", new Player("MrBean"));
         updatePlayerStats();
     }
 
@@ -325,17 +325,13 @@ public class PlayerRoster{
     public List<Player> findHallOfFame() {
         // Create a list to store players
         List<Player> playersList = new ArrayList<>(this.players.values());
-        
         // Sort the players list based on score in descending order
         Collections.sort(playersList, (p1, p2) -> Float.compare(p2.getScore(), p1.getScore()));
-
         /*
          for (Player player : playersList){
             System.out.println(player.getName() + " " + player.getScore());
         }
-
         */
-
         // Return the top 10 players
         return playersList.subList(0, Math.min(playersList.size(), 10));
     }
