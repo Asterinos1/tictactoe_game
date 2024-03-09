@@ -3,6 +3,7 @@ package View;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -75,30 +76,35 @@ public class PlayerPanel extends JPanel implements ActionListener {
         // Set constraints for playerName label
         constraints.gridy = 2; // Row 2
         constraints.insets = new Insets(10, 0, 0, 0); // Top margin
+        this.playerNameLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(playerNameLabel, constraints);
     
         // Add labels for player stats vertically
         constraints.gridy = 3; // Start from Row 3
         constraints.insets = new Insets(10, 0, 0, 0); // Top margin
 
-
         this.totalVictoriesLabel = new JLabel("Total Victories: ");
+        this.totalVictoriesLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(totalVictoriesLabel, constraints);
     
         constraints.gridy++;
         this.totalDefeatsLabel = new JLabel("Total Defeats: ");
+        this.totalDefeatsLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(totalDefeatsLabel, constraints);
     
         constraints.gridy++;
         this.totalDrawsLabel = new JLabel("Total Draws: ");
+        this.totalDrawsLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(totalDrawsLabel, constraints);
     
         constraints.gridy++;
         this.playerScoreLabel = new JLabel("Player Score: ");
+        this.playerScoreLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(playerScoreLabel, constraints);
 
         constraints.gridy++;
         this.totalGamesPlayedLabel = new JLabel("Total Games Played: ");
+        this.totalGamesPlayedLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         this.add(totalGamesPlayedLabel, constraints);
     
         // Make buttons non-focusable
@@ -152,10 +158,15 @@ public class PlayerPanel extends JPanel implements ActionListener {
                         playerNameLabel.setText(selectedPlayer.getName());
                         // Update player stats label
                         totalGamesPlayedLabel.setText("Total Games Played: " + selectedPlayer.getTotalGamesPlayed());
+
                         totalVictoriesLabel.setText("Total Victories: " + selectedPlayer.getNumOfVictories());
+
                         totalDrawsLabel.setText("Total Draws: " + selectedPlayer.getNumOfDraws());
+
                         totalDefeatsLabel.setText("Total Defeats: " + selectedPlayer.getNumOfDefeats());
+
                         playerScoreLabel.setText("Player Score: " + selectedPlayer.getScore());
+
                     }
                 }
                 // Close the playerRosterFrame

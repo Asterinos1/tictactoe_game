@@ -90,7 +90,7 @@ public class MainWindow extends JFrame implements ActionListener{
         //===================================================================================//
         //BannerPanel.
         if(e.getSource()==this.bp.QuitButton){
-            ViewActions.quitButtonAction();
+            System.exit(0);
         }
         if(e.getSource()==this.bp.addPlayerButton){
             bp.addPlayerToRoaster();

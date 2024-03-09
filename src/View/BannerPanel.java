@@ -17,8 +17,6 @@ import Model.PlayerRoster;
 public class BannerPanel extends JPanel implements ActionListener{
 
     PlayerRoster playerRoster;
-
-    ViewActions va = new ViewActions();
     JButton addPlayerButton = new JButton("Add player");
     JButton HOFButton = new JButton("Hall of fame");
     JButton QuitButton = new JButton("Quit");
