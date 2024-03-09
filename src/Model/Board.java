@@ -22,17 +22,6 @@ public class Board {
         initializeBoard();
         this.moves=MAXIMUM_MOVES;
     }
-
-    //print current board state.
-    public void printBoard(){
-        System.out.println("Current state of the board:");
-        for(int i=0; i<MTRX_DMNSN; i++){
-            for(int j=0; j<MTRX_DMNSN; j++){
-                System.out.print(board[i][j]+" ("+i+", "+j+")  ");
-            }
-            System.out.println("\n");
-        }
-    }
     
     //board initialization. E indicates "empty spot".
     public void initializeBoard(){

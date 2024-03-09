@@ -21,13 +21,16 @@ public class PlayerPanel extends JPanel implements ActionListener {
     // Variable to track the readiness state
     boolean isReady = false;
 
+    //Position of panel.
     String position;
 
     //components.
     JButton ReadyButton = new JButton("Ready");
     JButton SelectPlayerButton = new JButton("Select player");
+
     //Player name.
     JLabel playerNameLabel = new JLabel(" ");
+
     //Player stats.
     JLabel totalVictoriesLabel;
     JLabel totalDefeatsLabel;
@@ -35,7 +38,8 @@ public class PlayerPanel extends JPanel implements ActionListener {
     JLabel playerScoreLabel;
     JLabel totalGamesPlayedLabel;
 
-    String PlayerNameHere;
+    //To keep track of the player's name.
+    String PlayerNameHere=" ";
 
     //The roster.
     PlayerRoster playerRoster;

@@ -108,16 +108,20 @@ public class MainWindow extends JFrame implements ActionListener{
         }
 
         if (e.getSource() == this.lpp.ReadyButton) {
-            // Toggle readiness state
-            this.lpp.isReady = !(this.lpp.isReady);
+            if(this.lpp.getPlayerNameHere()==" "){
+                System.out.println("Select a player.");
+            }else{
+                // Toggle readiness state
+                this.lpp.isReady = !(this.lpp.isReady);
 
-            // Change button color based on readiness state
-            if (this.lpp.isReady) {
-                this.lpp.ReadyButton.setBackground(Color.GRAY);
-                System.out.println(this.lpp.position + " is ready.");
-            } else {
-                this.lpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
-                System.out.println(this.lpp.position + " not ready.");
+                // Change button color based on readiness state
+                if (this.lpp.isReady) {
+                    this.lpp.ReadyButton.setBackground(Color.GRAY);
+                    System.out.println(this.lpp.position + " is ready.");
+                } else {
+                    this.lpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
+                    System.out.println(this.lpp.position + " not ready.");
+                }
             }
         }
 
@@ -127,16 +131,21 @@ public class MainWindow extends JFrame implements ActionListener{
         }
 
         if (e.getSource() == this.rpp.ReadyButton) {
-            // Toggle readiness state
-            this.rpp.isReady = !(this.rpp.isReady);
 
-            // Change button color based on readiness state
-            if (this.rpp.isReady) {
-                this.rpp.ReadyButton.setBackground(Color.GRAY);
-                System.out.println(this.rpp.position + " is ready.");
-            } else {
-                this.rpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
-                System.out.println(this.rpp.position + " not ready.");
+            if(this.rpp.getPlayerNameHere()==" "){
+                System.out.println("Select a player first.");                
+            }else{
+                // Toggle readiness state
+                this.rpp.isReady = !(this.rpp.isReady);
+
+                // Change button color based on readiness state
+                if (this.rpp.isReady) {
+                    this.rpp.ReadyButton.setBackground(Color.GRAY);
+                    System.out.println(this.rpp.position + " is ready.");
+                } else {
+                    this.rpp.ReadyButton.setBackground(Color.WHITE); // Reset to default color
+                    System.out.println(this.rpp.position + " not ready.");
+                }
             }
         }
 
