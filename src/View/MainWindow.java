@@ -20,43 +20,8 @@ public class MainWindow extends JFrame implements ActionListener{
     public MainWindow(){
         this.board = new Board();
         this.playerRoster= new PlayerRoster();
-
         setupMainWindow();
-        //new
         enableButtonFunctionality();
-    
-        // Add action listener to the "Hall of Fame" button in BannerPanel
-        bp.HOFButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Toggle visibility of HallOfFame and GameBoard panels
-                hof.setVisible(!hof.isVisible());
-                gb.setVisible(!hof.isVisible());
-        
-                if(lpp.ReadyButton.isEnabled() && rpp.ReadyButton.isEnabled()){
-                    // Disable Ready buttons when Hall of Fame button is pressed
-                    lpp.ReadyButton.setEnabled(false);
-                    rpp.ReadyButton.setEnabled(false);
-                }else if(!lpp.ReadyButton.isEnabled() && !rpp.ReadyButton.isEnabled()){
-                    //Enable the buttons.
-                    lpp.ReadyButton.setEnabled(true);
-                    rpp.ReadyButton.setEnabled(true);
-                }
-               
-            }
-        });
-    }
-
-    public void gameLogic(){
-        //In this function the game is to be implemented.
-
-        //Example:
-        //this.hof.updatePlayerRoster();
-
-        //actionsListerns to be added to the buttons through here.
-        //this.hof.PlayerButton.addActionListerner(this.)
-
-        //Just use this class to run everything.
     }
 
     //Setup window settings, attach panels and set dimenions.
@@ -99,7 +64,6 @@ public class MainWindow extends JFrame implements ActionListener{
         //Right
         this.rpp.ReadyButton.addActionListener(this);
         this.rpp.SelectPlayerButton.addActionListener(this);
-
         //GameBoard.
         for(int i=0; i<GameBoard.NUM_OF_BUTTONS; i++){
             this.gb.buttons[i].addActionListener(this);
@@ -108,6 +72,22 @@ public class MainWindow extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Hall of fame.
+        if(e.getSource()==this.bp.HOFButton){
+            hof.setVisible(!hof.isVisible());
+            gb.setVisible(!hof.isVisible());
+    
+            if(lpp.ReadyButton.isEnabled() && rpp.ReadyButton.isEnabled()){
+                // Disable Ready buttons when Hall of Fame button is pressed
+                lpp.ReadyButton.setEnabled(false);
+                rpp.ReadyButton.setEnabled(false);
+            }else if(!lpp.ReadyButton.isEnabled() && !rpp.ReadyButton.isEnabled()){
+                //Enable the buttons.
+                lpp.ReadyButton.setEnabled(true);
+                rpp.ReadyButton.setEnabled(true);
+            }
+        }
+        //===================================================================================//
         //BannerPanel.
         if(e.getSource()==this.bp.QuitButton){
             ViewActions.quitButtonAction();
@@ -120,11 +100,8 @@ public class MainWindow extends JFrame implements ActionListener{
             lpp.setPlayerRoster(bp.getPlayerRoster());
             rpp.setPlayerRoster(bp.getPlayerRoster());
         }
-
         //====================================================================================//
-
         // PlayerPanel
-
         //Left.
         if (e.getSource() == this.lpp.SelectPlayerButton) {
             this.lpp.selectPlayerFromRoaster();
@@ -174,6 +151,8 @@ public class MainWindow extends JFrame implements ActionListener{
 
             this.lpp.SelectPlayerButton.setEnabled(false);
             this.rpp.SelectPlayerButton.setEnabled(false);
+            this.lpp.ReadyButton.setEnabled(false);
+            this.lpp.ReadyButton.setEnabled(false);
         } else {
             // Disable buttons in GameBoard
             for (JButton button : this.gb.buttons) {
@@ -245,6 +224,10 @@ public class MainWindow extends JFrame implements ActionListener{
                     //Reset select buttons.
                     this.lpp.SelectPlayerButton.setEnabled(true);
                     this.rpp.SelectPlayerButton.setEnabled(true);
+
+                    //Reset ready buttons.
+                    this.lpp.ReadyButton.setEnabled(true);
+                    this.rpp.ReadyButton.setEnabled(true);
 
                     //Reset HOF Button.
                     this.bp.HOFButton.setEnabled(true);
