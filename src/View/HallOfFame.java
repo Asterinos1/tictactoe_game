@@ -42,9 +42,14 @@ public class HallOfFame extends JPanel {
         
         playerListPanel.add(screenTitle);
 
+        //Creating a lazy gap between screenTitle and the leaderboard.
+        JLabel emptyJLabel = new JLabel(" ");
+        emptyJLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        playerListPanel.add(emptyJLabel);
+
         for (Player player : players) {
             JLabel playerLabel = new JLabel(index + ". "+ player.getName() + "   " + player.getScore());
-            playerLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set a larger font size, you can adjust the font and size as needed
+            playerLabel.setFont(new Font("Arial", Font.BOLD, 30)); // Set a larger font size, you can adjust the font and size as needed
             playerListPanel.add(playerLabel);
             index++;
         }

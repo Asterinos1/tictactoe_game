@@ -32,6 +32,17 @@ public class MainWindow extends JFrame implements ActionListener{
                 // Toggle visibility of HallOfFame and GameBoard panels
                 hof.setVisible(!hof.isVisible());
                 gb.setVisible(!hof.isVisible());
+        
+                if(lpp.ReadyButton.isEnabled() && rpp.ReadyButton.isEnabled()){
+                    // Disable Ready buttons when Hall of Fame button is pressed
+                    lpp.ReadyButton.setEnabled(false);
+                    rpp.ReadyButton.setEnabled(false);
+                }else if(!lpp.ReadyButton.isEnabled() && !rpp.ReadyButton.isEnabled()){
+                    //Enable the buttons.
+                    lpp.ReadyButton.setEnabled(true);
+                    rpp.ReadyButton.setEnabled(true);
+                }
+               
             }
         });
     }

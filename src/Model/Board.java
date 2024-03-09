@@ -56,12 +56,15 @@ public class Board {
                 setMatrixBlock(h, w, this.flag);
                 setFlag(!getFlag());
             }
-            if(checkForVictory('X') || moves==0){
+            if(checkForVictory('X')){
                 System.out.println("Player1(X) has won!");
                 setWinner(1);
                 gameHasFinished=true;
+            }else if(moves==0){
+                System.out.println("Tie.");
+                gameHasFinished=true;
+                setWinner(0);
             }
-
         }else if(getFlag()==false){
             System.out.println("Player2 (O) makes a move at " + h + ", " + w);
             if(isAvailablePosition(h, w)){
@@ -69,11 +72,14 @@ public class Board {
                 setMatrixBlock(h, w, this.flag);
                 setFlag(!getFlag());
             }
-            
-            if(checkForVictory('O') || moves==0){
+            if(checkForVictory('O')){
                 System.out.println("Player2(O) has won!");
                 setWinner(2);
                 gameHasFinished=true;
+            }else if(moves==0){
+                System.out.println("Tie.");
+                gameHasFinished=true;
+                setWinner(0);
             }
         }
     }
